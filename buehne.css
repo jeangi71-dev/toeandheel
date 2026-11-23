@@ -629,3 +629,136 @@ footer{border-top:0;background:#0E0A1F}
   radial-gradient(ellipse 46% 40% at 78% 50%,rgba(224,55,127,.20),transparent 70%),
   linear-gradient(180deg,#171131 0%,#1E1550 60%,#221757 100%)}
 .galerie .stage-fx,.kontakt .stage-fx{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 22%,#000 55%,transparent 96%);mask-image:linear-gradient(180deg,transparent 0,#000 22%,#000 55%,transparent 96%)}
+
+/* ===== Ueberarbeitung 4: durchdachtes Lichtkonzept =====
+   Kopf: echte Scheinwerfer an einer Traverse, daraus weiche Lichtkegel.
+   Kurse: Seitenlicht (von links und rechts). Showgruppe: Rampenlicht von unten mit Glitzer.
+   Kursleitung/Medien: hell und ruhig. Galerie: Sternenhimmel mit Nordlicht-Schimmer. Kontakt: warmes Licht von unten.
+   Keine Lichtkegel mehr aus dem Nichts. */
+
+/* --- Lichtkegel: wirklich weiche Raender (Kegelverlauf statt abgeschnittenem Dreieck) --- */
+.stage-fx .beam,.beam{
+  clip-path:none;filter:none;
+  --w:max(560px,66vh);
+  top:46px;height:calc(100% - 46px);
+  width:var(--w);margin-left:calc(var(--w) * -.5);
+  background:conic-gradient(from 165deg at 50% 0%,
+    transparent 0deg,
+    color-mix(in srgb,var(--c) 30%,transparent) 5deg,
+    color-mix(in srgb,var(--c) 78%,transparent) 12deg,
+    color-mix(in srgb,var(--c) 92%,#fff 8%) 15deg,
+    color-mix(in srgb,var(--c) 78%,transparent) 18deg,
+    color-mix(in srgb,var(--c) 30%,transparent) 25deg,
+    transparent 30deg,transparent 360deg);
+  -webkit-mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.75) 35%,rgba(0,0,0,.25) 72%,transparent 96%);
+  mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.75) 35%,rgba(0,0,0,.25) 72%,transparent 96%);
+  opacity:.5;mix-blend-mode:screen;transform-origin:50% 0;
+}
+.beam:nth-of-type(3){opacity:.36}
+@media (max-width:699px){ .stage-fx .beam,.beam{filter:none} }
+.stage-fx,.galerie .stage-fx,.kontakt .stage-fx{-webkit-mask-image:none;mask-image:none;top:0}
+/* nur der Kopf hat Scheinwerfer und Kegel */
+.showgruppe .stage-fx,.galerie .stage-fx,.kontakt .stage-fx{display:none}
+
+/* --- Scheinwerfer an der Traverse (Kopf) --- */
+.hero .traverse{display:block;position:absolute;top:0;left:0;right:0;height:64px}
+.hero .traverse::before{
+  left:-2%;right:-2%;top:9px;height:9px;border-radius:5px;
+  background:linear-gradient(180deg,#5A547A 0%,#2A2446 45%,#141026 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 18px rgba(0,0,0,.55);
+}
+.hero .traverse i{
+  top:14px;width:34px;height:36px;margin-left:-17px;border-radius:0;background:none;box-shadow:none;animation:none;
+}
+.hero .traverse i::before{
+  content:"";position:absolute;inset:0;
+  clip-path:polygon(40% 0,60% 0,60% 16%,78% 22%,100% 82%,86% 100%,14% 100%,0 82%,22% 22%,40% 16%);
+  background:linear-gradient(90deg,#0F0C20 0%,#3F3963 38%,#6A648E 50%,#3F3963 62%,#0F0C20 100%);
+}
+.hero .traverse i::after{
+  content:"";position:absolute;left:50%;bottom:-4px;width:24px;height:10px;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(ellipse at 50% 40%,#fff 0%,color-mix(in srgb,var(--c) 70%,#fff 30%) 45%,var(--c) 75%);
+  box-shadow:0 0 14px 4px color-mix(in srgb,var(--c) 75%,transparent),0 0 44px 16px color-mix(in srgb,var(--c) 38%,transparent);
+}
+.hero .traverse i:nth-child(1){left:10%;--c:#E0377F}
+.hero .traverse i:nth-child(2){left:30%;--c:#8B6CF0}
+.hero .traverse i:nth-child(3){left:52%;--c:#FFE7C2}
+.hero .traverse i:nth-child(4){left:72%;--c:#FF7AB6}
+.hero .traverse i:nth-child(5){left:92%;--c:#7C83FF}
+@media (max-width:699px){ .hero .traverse i:nth-child(2),.hero .traverse i:nth-child(4){display:none} }
+.hero{padding-top:clamp(64px,9vh,92px)}
+
+/* --- gemeinsame Lichtebenen der Abschnitte --- */
+.angebot::before,.angebot::after,.showgruppe::before,.showgruppe::after,.galerie::before,.galerie::after,.kontakt::before,.kontakt::after{
+  content:"";display:block;position:absolute;pointer-events:none;z-index:0;background-size:auto;background-position:0 0;opacity:1;height:auto;top:auto;left:auto;right:auto;
+}
+
+/* Kurse: Seitenlicht wie aus den Buehnengassen */
+.angebot::before{inset:0;
+  background:
+    radial-gradient(ellipse 46% 56% at -6% 46%,rgba(224,55,127,.50),rgba(224,55,127,.16) 45%,transparent 72%),
+    radial-gradient(ellipse 46% 56% at 106% 58%,rgba(124,131,255,.48),rgba(124,131,255,.15) 45%,transparent 72%);
+  mix-blend-mode:screen;animation:licht-atmen 9s ease-in-out infinite alternate;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 22%,#000 78%,transparent 100%)}
+.angebot::after{display:none}
+
+/* Showgruppe: Rampenlicht von unten, darueber feiner Glitzer */
+.showgruppe::before{left:0;right:0;bottom:0;height:62%;
+  background:
+    radial-gradient(ellipse 11% 100% at 8% 100%,rgba(255,214,160,.40),transparent 72%),
+    radial-gradient(ellipse 11% 100% at 25% 100%,rgba(255,150,196,.36),transparent 72%),
+    radial-gradient(ellipse 11% 100% at 42% 100%,rgba(255,214,160,.40),transparent 72%),
+    radial-gradient(ellipse 11% 100% at 59% 100%,rgba(255,150,196,.36),transparent 72%),
+    radial-gradient(ellipse 11% 100% at 76% 100%,rgba(255,214,160,.40),transparent 72%),
+    radial-gradient(ellipse 11% 100% at 93% 100%,rgba(255,150,196,.36),transparent 72%),
+    linear-gradient(0deg,rgba(255,196,150,.22),transparent 34%);
+  mix-blend-mode:screen;animation:licht-atmen 7s ease-in-out infinite alternate;
+  -webkit-mask-image:linear-gradient(0deg,transparent 0,#000 16%,#000 100%);mask-image:linear-gradient(0deg,transparent 0,#000 16%,#000 100%)}
+.showgruppe::after,.galerie::before,.kontakt::before{inset:0;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.95) 0 1.2px,transparent 1.9px),
+    radial-gradient(circle,rgba(255,214,160,.9) 0 1.6px,transparent 2.4px),
+    radial-gradient(circle,rgba(200,170,255,.9) 0 1px,transparent 1.7px),
+    radial-gradient(circle,rgba(255,255,255,.8) 0 2px,rgba(255,255,255,.18) 3px,transparent 5px);
+  background-size:230px 210px,310px 270px,170px 190px,520px 430px;
+  background-position:20px 30px,140px 90px,70px 150px,260px 200px;
+  animation:funkeln 5.5s ease-in-out infinite alternate;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 72%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 24%,#000 72%,transparent 100%)}
+.showgruppe::after{opacity:.5;animation-duration:4.2s}
+
+/* Galerie: Sternenhimmel mit Nordlicht-Schimmer */
+.galerie::after{left:-20%;right:-20%;top:14%;height:46%;
+  background:
+    radial-gradient(ellipse 34% 46% at 24% 50%,rgba(124,131,255,.34),transparent 70%),
+    radial-gradient(ellipse 30% 40% at 52% 42%,rgba(224,55,127,.26),transparent 70%),
+    radial-gradient(ellipse 34% 46% at 80% 56%,rgba(120,220,210,.16),transparent 70%);
+  mix-blend-mode:screen;animation:nordlicht 22s ease-in-out infinite alternate}
+
+/* Kontakt: warmes Licht steigt von unten auf, Sterne laufen aus */
+.kontakt::after{left:0;right:0;bottom:0;height:58%;
+  background:
+    radial-gradient(ellipse 60% 100% at 30% 100%,rgba(224,55,127,.30),transparent 70%),
+    radial-gradient(ellipse 50% 90% at 78% 100%,rgba(255,196,150,.22),transparent 70%);
+  mix-blend-mode:screen;animation:licht-atmen 10s ease-in-out infinite alternate;
+  -webkit-mask-image:linear-gradient(0deg,transparent 0,#000 20%,#000 100%);mask-image:linear-gradient(0deg,transparent 0,#000 20%,#000 100%)}
+.kontakt::before{opacity:.6}
+
+@keyframes licht-atmen{from{opacity:.62}to{opacity:1}}
+@keyframes funkeln{0%{opacity:.35}50%{opacity:.9}100%{opacity:.55}}
+@keyframes nordlicht{from{transform:translateX(-5%) scaleY(.92)}to{transform:translateX(5%) scaleY(1.08)}}
+@media (prefers-reduced-motion:reduce){
+  .angebot::before,.showgruppe::before,.showgruppe::after,.galerie::before,.galerie::after,.kontakt::before,.kontakt::after{animation:none!important}
+}
+
+/* --- Hintergrund: laengere, sanftere Uebergaenge, nach unten ruhiger --- */
+.hero{background:linear-gradient(180deg,#171131 0%,#1E1550 60%,#221757 100%)}
+.angebot{background:linear-gradient(180deg,#221757 0,#2A1A62 260px,#3E2174 100%)}
+.showgruppe{background:linear-gradient(180deg,#3E2174 0,#4E2277 240px,#74256F 100%)}
+.kursleitung{padding-top:calc(clamp(48px,9vh,76px) + 300px);
+  background:linear-gradient(180deg,#74256F 0,#9A3F7C 110px,#C67A98 220px,#E7BDBF 320px,#F6E3DD 420px,#FBEEE4 100%)}
+.galerie{padding-top:calc(clamp(48px,9vh,76px) + 320px);
+  background:linear-gradient(180deg,#FBEEE4 0,#EBCBCF 100px,#B98AAE 210px,#6C4A8A 320px,#2B1C58 430px,#161033 100%)}
+.medien{padding-top:calc(clamp(48px,9vh,76px) + 320px);
+  background:linear-gradient(180deg,#161033 0,#2C1D5A 110px,#6A4D8E 220px,#B79CC9 320px,#E6D8EC 420px,#F5EDF4 100%)}
+.kontakt{padding-top:calc(clamp(48px,9vh,76px) + 320px);
+  background:linear-gradient(180deg,#F5EDF4 0,#DCCAE4 100px,#A688BC 210px,#5E4285 320px,#281A52 430px,#0E0A1F 100%)}
