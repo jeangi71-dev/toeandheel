@@ -350,3 +350,51 @@ a,button,label,summary,select{touch-action:manipulation;-webkit-tap-highlight-co
 .site-head .logo{display:inline-flex;align-items:center;gap:10px}
 .logo-mark{width:44px;height:44px;border-radius:50%;flex:none;box-shadow:0 0 0 2px rgba(255,243,222,.9)}
 footer .brand img{width:112px;height:112px;border:0;background:none;border-radius:50%;box-shadow:0 0 0 3px rgba(255,243,222,.9)}
+
+/* Farbige Zwischen-Abschnitte statt Weiss: jeder Abschnitt steht in einer Strahlerfarbe */
+.angebot{
+  background:
+    radial-gradient(circle 420px at 92% 8%,rgba(224,55,127,.30),transparent 70%),
+    radial-gradient(circle 380px at 4% 96%,rgba(51,201,194,.34),transparent 70%),
+    radial-gradient(circle 300px at 55% 48%,rgba(255,255,255,.35),transparent 70%),
+    linear-gradient(160deg,#FFD77A 0%,#FFC27F 55%,#FFAE94 100%);
+}
+.angebot .kicker{color:var(--magenta-shadow)}
+.angebot .lead{color:#2A1B2E;font-weight:500}
+.angebot .course{box-shadow:0 18px 34px -20px rgba(110,18,54,.55)}
+
+.kursleitung{
+  color:var(--cream);
+  background:
+    radial-gradient(circle 460px at 8% 10%,rgba(51,201,194,.30),transparent 70%),
+    radial-gradient(circle 420px at 96% 92%,rgba(247,198,91,.26),transparent 70%),
+    linear-gradient(150deg,#3A1C7C 0%,#6B1E78 55%,#A3215F 100%);
+}
+.kursleitung .kicker{color:var(--amber)}
+.kursleitung .name{color:var(--cream)}
+.kursleitung .lead{color:rgba(255,244,224,.95)}
+.kursleitung .career li{border-bottom-color:rgba(255,244,224,.22)}
+.kursleitung .career .star{color:var(--amber)}
+.kursleitung .career small{color:rgba(255,244,224,.82)}
+.kursleitung details.cv{background:var(--foyer);color:var(--ink);border-color:transparent}
+.kursleitung .quote{background:var(--foyer);border-left-color:var(--amber)}
+.kursleitung :focus-visible{outline-color:var(--amber)}
+.kursleitung .teacher .arch{box-shadow:0 0 0 10px rgba(255,244,224,.10),0 30px 60px -30px rgba(0,0,0,.6)}
+
+.medien{
+  background:
+    radial-gradient(circle 400px at 6% 6%,rgba(139,92,246,.26),transparent 70%),
+    radial-gradient(circle 440px at 96% 94%,rgba(247,198,91,.42),transparent 70%),
+    linear-gradient(160deg,#A9EDE6 0%,#BDE9F5 60%,#D5E2FF 100%);
+}
+.medien .kicker{color:#5A1670}
+.medien .press a{box-shadow:0 18px 34px -22px rgba(23,17,49,.55)}
+
+/* Lichtpunkte als Abschluss oben an den farbigen Abschnitten (wie Lampen am Bühnenrand) */
+.angebot::before,.kursleitung::before,.medien::before{
+  content:"";position:absolute;left:0;right:0;top:14px;height:10px;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(255,255,255,.95) 0 3px,transparent 4px);
+  background-size:28px 10px;background-position:center;opacity:.75;
+}
+.angebot::before{background-image:radial-gradient(circle,#B0225A 0 3px,transparent 4px);opacity:.55}
+.medien::before{background-image:radial-gradient(circle,#5A1670 0 3px,transparent 4px);opacity:.45}
