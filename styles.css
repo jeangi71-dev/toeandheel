@@ -458,3 +458,21 @@ footer .brand img:hover{animation:none}
   80%{transform:translate(36px,27px) scale(2.22,2.37)}
 }
 @media (prefers-reduced-motion:reduce){ .site-head .logo.aktiv .logo-mark[class*="bw-"]{animation:none!important} }
+
+/* Logo in der Fusszeile: Effekt über die Klasse «aktiv» (Maus und Finger), fünf Bewegungen */
+footer .brand img{transition:transform .5s cubic-bezier(.22,1,.36,1);cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+footer .brand img:hover{transform:none}
+footer .brand img.aktiv{transform:scale(1.28)}
+footer .brand img.aktiv.fw-pendel{animation:fw-pendel 1.3s .2s ease-in-out 1}
+footer .brand img.aktiv.fw-herz{animation:fw-herz .9s .25s ease-in-out 1}
+footer .brand img.aktiv.fw-pirouette{animation:fw-pirouette .95s cubic-bezier(.3,.1,.2,1) 1}
+footer .brand img.aktiv.fw-huepf{animation:fw-huepf .8s .25s cubic-bezier(.3,.6,.4,1) 1}
+footer .brand img.aktiv.fw-pudding{animation:fw-pudding .9s .22s ease-out 1}
+@keyframes fw-pendel{0%,100%{transform:scale(1.28) rotate(0)}15%{transform:scale(1.28) rotate(11deg)}35%{transform:scale(1.28) rotate(-8deg)}55%{transform:scale(1.28) rotate(5deg)}75%{transform:scale(1.28) rotate(-2deg)}}
+@keyframes fw-herz{0%,36%,72%,100%{transform:scale(1.28)}18%{transform:scale(1.48)}54%{transform:scale(1.4)}}
+@keyframes fw-pirouette{0%{transform:scale(1) rotate(0)}100%{transform:scale(1.28) rotate(360deg)}}
+@keyframes fw-huepf{0%,45%,100%{transform:scale(1.28) translateY(0)}22%{transform:scale(1.28,1.33) translateY(-16px)}40%{transform:scale(1.34,1.2) translateY(2px)}68%{transform:scale(1.28,1.32) translateY(-8px)}88%{transform:scale(1.32,1.24) translateY(1px)}}
+@keyframes fw-pudding{0%,100%{transform:scale(1.28)}20%{transform:scale(1.52,1.08)}40%{transform:scale(1.12,1.46)}60%{transform:scale(1.37,1.2)}80%{transform:scale(1.24,1.32)}}
+.site-head .logo{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+@media (prefers-reduced-motion:reduce){ footer .brand img.aktiv{animation:none!important} }
+footer .stand{display:block;margin-top:6px;font-size:12px;opacity:.5}

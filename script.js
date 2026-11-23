@@ -137,41 +137,53 @@
   ziele.forEach(function (el) {
     el.addEventListener('mouseenter', function () { steppen(0.34); });
     el.addEventListener('click', function () { steppen(0); });
+    el.addEventListener('touchend', function () { steppen(0); }, { passive: true });
   });
 })();
 
-// Logo-Bewegung: bei jedem Darüberfahren zufällig eine von elf (nie zweimal dieselbe hintereinander)
+// Logo-Bewegung: zufällig eine andere bei jedem Darüberfahren (Maus) oder Antippen (Finger); oben elf, unten fünf.
+// Der Effekt hängt an der Klasse «aktiv», nie an :hover, weil ein Handy «Maus darüber» nach dem Antippen nicht mehr loslässt.
 (function () {
-  var logo = document.querySelector('.site-head .logo');
-  var bild = logo && logo.querySelector('.logo-mark');
-  if (!bild) return;
-  var arten = ['ruhig', 'huepf', 'pendel', 'pirouette', 'herz', 'seite', 'muenze', 'ferse', 'licht', 'pudding', 'verbeugung'];
-  var letzte = -1;
-  function waehlen() {
-    var i;
-    do { i = Math.floor(Math.random() * arten.length); } while (i === letzte);
-    letzte = i;
-    arten.forEach(function (a) { bild.classList.remove('bw-' + a); });
-    bild.classList.add('bw-' + arten[i]);
-  }
-  waehlen();
+  function einrichten(traeger, bild, vorsatz, arten) {
+    if (!traeger || !bild) return;
+    var letzte = -1, uhr = null, zuletztGetippt = 0;
+    function waehlen() {
+      var i;
+      do { i = Math.floor(Math.random() * arten.length); } while (i === letzte && arten.length > 1);
+      letzte = i;
+      arten.forEach(function (a) { bild.classList.remove(vorsatz + a); });
+      bild.classList.add(vorsatz + arten[i]);
+    }
+    function an() { waehlen(); traeger.classList.add('aktiv'); }
+    function aus() { traeger.classList.remove('aktiv'); }
+    function tippen() {
+      var jetzt = Date.now();
+      if (jetzt - zuletztGetippt < 350) return;   // derselbe Tipp kommt als mehrere Ereignisse
+      zuletztGetippt = jetzt;
+      clearTimeout(uhr);
+      traeger.classList.remove('aktiv');
+      void bild.offsetWidth;                      // Bewegung sicher neu starten
+      an();
+      uhr = setTimeout(aus, 2000);
+    }
+    function istMaus(e) { return e.pointerType === 'mouse'; }
 
-  var zeiger = 'mouse', uhr = null;
-  function an() { waehlen(); logo.classList.add('aktiv'); }
-  function aus() { logo.classList.remove('aktiv'); }
-  window.addEventListener('pointerdown', function (e) { zeiger = e.pointerType || 'mouse'; }, { passive: true, capture: true });
-  // Maus: gross, solange sie darüber ist
-  logo.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') an(); });
-  logo.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') aus(); });
-  // Finger: antippen zeigt Bewegung und Ton, danach geht das Logo von selbst zurück
-  logo.addEventListener('click', function () {
-    if (zeiger === 'mouse') return;
-    clearTimeout(uhr);
-    logo.classList.remove('aktiv'); void logo.offsetWidth;
-    an();
-    uhr = setTimeout(aus, 2000);
-  });
-  // Tastatur: beim Ansteuern mit der Tab-Taste ebenfalls zeigen
-  logo.addEventListener('focus', function () { if (logo.matches(':focus-visible')) an(); });
-  logo.addEventListener('blur', aus);
+    waehlen();
+    if (window.PointerEvent) {
+      traeger.addEventListener('pointerenter', function (e) { if (istMaus(e)) { clearTimeout(uhr); an(); } });
+      traeger.addEventListener('pointerleave', function (e) { if (istMaus(e)) aus(); });
+      traeger.addEventListener('pointerup', function (e) { if (!istMaus(e)) tippen(); });
+    } else {
+      traeger.addEventListener('mouseenter', an);
+      traeger.addEventListener('mouseleave', aus);
+    }
+    traeger.addEventListener('touchend', tippen, { passive: true });
+    traeger.addEventListener('click', function (e) { if (e.pointerType && e.pointerType !== 'mouse') tippen(); });
+  }
+
+  var kopf = document.querySelector('.site-head .logo');
+  einrichten(kopf, kopf && kopf.querySelector('.logo-mark'), 'bw-',
+    ['ruhig', 'huepf', 'pendel', 'pirouette', 'herz', 'seite', 'muenze', 'ferse', 'licht', 'pudding', 'verbeugung']);
+  var fuss = document.querySelector('footer .brand img');
+  einrichten(fuss, fuss, 'fw-', ['pendel', 'herz', 'pirouette', 'huepf', 'pudding']);
 })();

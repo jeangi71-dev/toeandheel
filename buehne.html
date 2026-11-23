@@ -15,7 +15,12 @@
 <link rel="apple-touch-icon" href="bilder/logo-192.png">
 <link rel="preload" href="schrift/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="buehne.css?v=19">
+<link rel="stylesheet" href="buehne.css?v=22">
+<script>
+/* Testphase: zeigt das Gerät eine ältere Fassung als der Server, lädt die Seite einmal frisch nach */
+(function(){var hier=22;try{fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+if(d.version>hier&&!/[?&]neu=/.test(location.search)){location.replace(location.pathname+'?neu='+d.version+location.hash)}}).catch(function(){})}catch(e){}})();
+</script>
 </head>
 <body>
 <a class="skip" href="#angebot">Zum Inhalt springen</a>
@@ -377,7 +382,7 @@
       <img src="bilder/logo.png" alt="Logo Toe &amp; Heel Hergiswil" loading="lazy" width="132" height="132">
       <div>
         <a class="logo" translate="no" href="#top">Toe <span>&amp;</span> Heel</a>
-        <p style="margin:6px 0 0"><small>Stepptanz in Hergiswil</small></p>
+        <p style="margin:6px 0 0"><small>Stepptanz in Hergiswil</small><small class="stand">Fassung 22</small></p>
       </div>
     </div>
     <ul>
@@ -401,6 +406,6 @@
   </div>
 </dialog>
 
-<script src="script.js?v=11" defer></script>
+<script src="script.js?v=22" defer></script>
 </body>
 </html>
