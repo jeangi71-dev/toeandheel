@@ -834,3 +834,61 @@ footer{border-top:0;background:#0E0A1F}
 .hero .beam:nth-of-type(4){animation-duration:12s}
 .hero .beam:nth-of-type(5){animation-duration:10s}
 @media (prefers-reduced-motion:reduce){.hero .beam{animation:none!important}}
+
+/* ===== Logo: sechs Bewegungen, bei jedem Darueberfahren zufaellig eine (Klasse bw-... setzt script.js). Stepp-Kipper entfernt. ===== */
+.site-head .logo:hover .logo-mark{animation:none}
+footer .brand img:hover{animation:none}
+
+/* Pendeln: haengt an einem Punkt ueber dem Logo und schwingt aus */
+.logo-mark.bw-pendel{transform-origin:50% -40%}
+.site-head .logo:hover .logo-mark.bw-pendel{transform:translate(36px,-38px) scale(2.3);animation:bw-pendel 1.5s .25s ease-in-out 1}
+@keyframes bw-pendel{
+  0%,100%{transform:translate(36px,-38px) scale(2.3) rotate(0)}
+  15%{transform:translate(36px,-38px) scale(2.3) rotate(12deg)}
+  35%{transform:translate(36px,-38px) scale(2.3) rotate(-9deg)}
+  55%{transform:translate(36px,-38px) scale(2.3) rotate(5deg)}
+  75%{transform:translate(36px,-38px) scale(2.3) rotate(-2.5deg)}
+}
+/* Ferse-Spitze: wippt ueber die untere Kante */
+.logo-mark.bw-ferse{transform-origin:50% 100%}
+.site-head .logo:hover .logo-mark.bw-ferse{transform:translate(36px,64px) scale(2.3);animation:bw-ferse .85s .28s ease-in-out 1}
+@keyframes bw-ferse{
+  0%,100%{transform:translate(36px,64px) scale(2.3) rotate(0)}
+  22%{transform:translate(36px,64px) scale(2.3) rotate(-10deg)}
+  50%{transform:translate(36px,64px) scale(2.3) rotate(9deg)}
+  76%{transform:translate(36px,64px) scale(2.3) rotate(-4deg)}
+}
+/* Verbeugung: neigt sich nach vorn und richtet sich wieder auf */
+.logo-mark.bw-verbeugung{transform-origin:50% 100%}
+.site-head .logo:hover .logo-mark.bw-verbeugung{transform:translate(36px,64px) scale(2.3);animation:bw-verbeugung 1.1s .25s ease-in-out 1}
+@keyframes bw-verbeugung{
+  0%,100%{transform:translate(36px,64px) scale(2.3) perspective(300px) rotateX(0)}
+  45%{transform:translate(36px,64px) scale(2.3) perspective(300px) rotateX(50deg)}
+  72%{transform:translate(36px,64px) scale(2.3) perspective(300px) rotateX(-8deg)}
+}
+/* Herzschlag: zwei Pulse */
+.logo-mark.bw-herz{transform-origin:50% 50%}
+.site-head .logo:hover .logo-mark.bw-herz{transform:translate(36px,27px) scale(2.3);animation:bw-herz .9s .28s ease-in-out 1}
+@keyframes bw-herz{
+  0%,36%,72%,100%{transform:translate(36px,27px) scale(2.3)}
+  18%{transform:translate(36px,27px) scale(2.66)}
+  54%{transform:translate(36px,27px) scale(2.52)}
+}
+/* Pirouette: eine ganze Drehung beim Groesserwerden */
+.logo-mark.bw-pirouette{transform-origin:50% 50%}
+.site-head .logo:hover .logo-mark.bw-pirouette{transform:translate(36px,27px) scale(2.3);animation:bw-pirouette .95s cubic-bezier(.3,.1,.2,1) 1}
+@keyframes bw-pirouette{
+  0%{transform:translate(0,0) scale(1) rotate(0)}
+  100%{transform:translate(36px,27px) scale(2.3) rotate(360deg)}
+}
+/* Huepfen: zwei kleine Spruenge */
+.logo-mark.bw-huepf{transform-origin:50% 50%}
+.site-head .logo:hover .logo-mark.bw-huepf{transform:translate(36px,27px) scale(2.3);animation:bw-huepf .8s .28s cubic-bezier(.3,.6,.4,1) 1}
+@keyframes bw-huepf{
+  0%,45%,100%{transform:translate(36px,27px) scale(2.3)}
+  22%{transform:translate(36px,9px) scale(2.3,2.38)}
+  40%{transform:translate(36px,29px) scale(2.4,2.16)}
+  68%{transform:translate(36px,17px) scale(2.3,2.35)}
+  88%{transform:translate(36px,28px) scale(2.36,2.22)}
+}
+@media (prefers-reduced-motion:reduce){ .site-head .logo:hover .logo-mark[class*="bw-"]{animation:none!important} }

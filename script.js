@@ -139,3 +139,21 @@
     el.addEventListener('click', function () { steppen(0); });
   });
 })();
+
+// Logo-Bewegung: bei jedem Darüberfahren zufällig eine von sechs (nie zweimal dieselbe hintereinander)
+(function () {
+  var logo = document.querySelector('.site-head .logo');
+  var bild = logo && logo.querySelector('.logo-mark');
+  if (!bild) return;
+  var arten = ['pendel', 'verbeugung', 'ferse', 'herz', 'pirouette', 'huepf'];
+  var letzte = -1;
+  function waehlen() {
+    var i;
+    do { i = Math.floor(Math.random() * arten.length); } while (i === letzte);
+    letzte = i;
+    arten.forEach(function (a) { bild.classList.remove('bw-' + a); });
+    bild.classList.add('bw-' + arten[i]);
+  }
+  waehlen();
+  logo.addEventListener('mouseenter', waehlen);
+})();
