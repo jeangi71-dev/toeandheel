@@ -323,3 +323,14 @@ html{scroll-padding-top:84px}
 @keyframes logo-wackeln-klein{0%,100%{transform:scale(1.25) rotate(0)}25%{transform:scale(1.25) rotate(-6deg)}75%{transform:scale(1.25) rotate(6deg)}}
 footer .brand img{width:132px;height:132px}
 @media (max-width:899px){ .logo-mark{width:50px;height:50px} .site-head .logo{font-size:28px} }
+
+/* Maus-Effekt verfeinert: Logo wächst nach unten rechts, Schriftzug rückt daneben und wird grösser */
+.logo-mark{transform-origin:0 12%}
+.logo-text{display:inline-block;transition:transform .45s cubic-bezier(.34,1.56,.64,1);transform-origin:left center}
+@media (hover:hover){
+  .site-head .logo:hover{transform:none}
+  .site-head .logo:hover .logo-mark{transform:scale(2.5);animation:logo-wackeln2 1.1s .4s ease-in-out infinite}
+  .site-head .logo:hover .logo-text{transform:translateX(92px) scale(1.3)}
+}
+@keyframes logo-wackeln2{0%,100%{transform:scale(2.5) rotate(0)}25%{transform:scale(2.5) rotate(-6deg)}75%{transform:scale(2.5) rotate(6deg)}}
+@media (prefers-reduced-motion:reduce){ .site-head .logo:hover .logo-mark,footer .brand img:hover{animation:none!important} }
