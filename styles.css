@@ -286,3 +286,17 @@ dialog.lightbox{overscroll-behavior:contain}
 .cv-body h3{line-height:1.05}
 .split .arch img{object-position:50% 0}
 .split .arch img{transform-origin:50% 0}
+
+/* Anpassung an die Bildschirmhöhe (Laptop bis grosser Monitor): Titel und Bilder richten sich nach Breite UND Höhe */
+@media (min-width:900px){
+  section{padding:clamp(48px,9vh,76px) 0}
+  .hero{padding:clamp(28px,6vh,72px) 0 clamp(44px,9vh,104px)}
+  .hero h1{font-size:clamp(54px,min(9.2vw,14vh),132px)}
+  .sec-title{font-size:clamp(46px,min(6.2vw,11vh),88px)}
+  .name{font-size:clamp(50px,min(6vw,10.5vh),84px)}
+  .hero-visual{max-width:min(440px,54vh)}
+  .split .arch{max-width:min(460px,60vh)}
+  .teacher .arch{max-width:min(420px,54vh)}
+  .course .pic{aspect-ratio:16/9}
+}
+@media (min-width:1500px){ .wrap{max-width:min(1400px,76vw)} body{font-size:18px} }
