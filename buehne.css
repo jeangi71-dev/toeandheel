@@ -818,3 +818,9 @@ footer{border-top:0;background:#0E0A1F}
   background:
     radial-gradient(ellipse 44% 38% at 28% 68%,rgba(224,55,127,.30),transparent 72%),
     radial-gradient(ellipse 38% 34% at 76% 70%,rgba(255,196,150,.22),transparent 72%)}
+
+/* Showgruppe: keine einzelnen Lichtflecken mehr, nur ein gleichmaessiger, weicher Schein von unten */
+.showgruppe::before{left:-10%;right:-10%;bottom:0;height:80%;animation:none;-webkit-mask-image:none;mask-image:none;
+  background:radial-gradient(ellipse 62% 46% at 50% 62%,rgba(255,170,190,.16),rgba(255,170,190,.07) 45%,transparent 72%)}
+.showgruppe{background:linear-gradient(180deg,#3E2174 0,#4A2276 240px,#5F2473 70%,#6E2670 100%)}
+.kursleitung{background:linear-gradient(180deg,#6E2670 0,#8E3D7C 120px,#B87496 240px,#DDB3BC 350px,#F3DFDB 450px,#FBEEE4 100%);padding-top:calc(clamp(48px,9vh,76px) + 330px)}
