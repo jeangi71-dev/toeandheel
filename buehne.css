@@ -628,3 +628,4 @@ footer{border-top:0;background:#0E0A1F}
 .hero{background:
   radial-gradient(ellipse 46% 40% at 78% 50%,rgba(224,55,127,.20),transparent 70%),
   linear-gradient(180deg,#171131 0%,#1E1550 60%,#221757 100%)}
+.galerie .stage-fx,.kontakt .stage-fx{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 22%,#000 55%,transparent 96%);mask-image:linear-gradient(180deg,transparent 0,#000 22%,#000 55%,transparent 96%)}
