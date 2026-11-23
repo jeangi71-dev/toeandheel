@@ -166,7 +166,7 @@ details.cv summary::-webkit-details-marker{display:none}
 details.cv summary::after{content:"+";font-family:var(--display);font-size:30px;line-height:1;color:var(--tomato-deep);transition:transform .3s ease}
 details.cv[open] summary::after{transform:rotate(45deg)}
 .cv-body{padding:0 20px 20px}
-.cv-body h4{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:.03em;text-transform:uppercase;color:var(--night);margin:18px 0 6px}
+.cv-body h3{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:.03em;text-transform:uppercase;color:var(--night);margin:18px 0 6px}
 .cv-body dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:16px}
 .cv-body dt{font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
 .cv-body dd{margin:0}
@@ -276,3 +276,11 @@ footer small{color:rgba(255,243,222,.6)}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* Feinschliff nach Web-Interface-Richtlinien */
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+a,button,label,summary,select{touch-action:manipulation;-webkit-tap-highlight-color:rgba(242,177,52,.25)}
+dialog.lightbox{overscroll-behavior:contain}
+.marquee:hover .track,.marquee:active .track{animation-play-state:paused}
+.cv-body h3{line-height:1.05}
