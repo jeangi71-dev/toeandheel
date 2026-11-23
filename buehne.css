@@ -507,3 +507,28 @@ footer .brand img{width:132px;height:132px}
 @media (prefers-reduced-motion:reduce){ .beam{animation:none!important} }
 .logo .logo-text{color:var(--cream)}
 .logo .logo-text span{color:var(--amber,var(--mustard))}
+
+/* Logo-Bewegung natürlicher: weich grösser werden, dann drei kurze «Stepp»-Kipper im Takt (einmal, kein Dauerwackeln) */
+.logo-mark,.logo-text,footer .brand img{transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .3s ease}
+@media (hover:hover){
+  .site-head .logo:hover .logo-mark{transform:scale(2.3);animation:logo-steppen .62s .28s cubic-bezier(.3,.7,.4,1) 1}
+  .site-head .logo:hover .logo-text{transform:translateX(80px) scale(1.25)}
+  footer .brand img:hover{transform:scale(1.2);animation:logo-steppen-klein .62s .2s cubic-bezier(.3,.7,.4,1) 1}
+}
+@keyframes logo-steppen{
+  0%{transform:scale(2.3) rotate(0)}
+  16%{transform:scale(2.3) translateY(-1.5px) rotate(-6deg)}
+  32%{transform:scale(2.3) rotate(0)}
+  48%{transform:scale(2.3) translateY(-1.5px) rotate(5deg)}
+  64%{transform:scale(2.3) rotate(0)}
+  82%{transform:scale(2.34) translateY(-2px) rotate(-3deg)}
+  100%{transform:scale(2.3) rotate(0)}
+}
+@keyframes logo-steppen-klein{
+  0%,32%,64%,100%{transform:scale(1.2) rotate(0)}
+  16%{transform:scale(1.2) rotate(-5deg)}
+  48%{transform:scale(1.2) rotate(4deg)}
+  82%{transform:scale(1.22) rotate(-2deg)}
+}
+/* Lichtquellen oben entfernt: die Strahlen kommen von ausserhalb des Bildes */
+.stage-fx::before{display:none}

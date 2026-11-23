@@ -89,3 +89,59 @@
     startX = null;
   }, { passive: true });
 })();
+
+// Steppgeräusch «da-da-dack» beim Logo (wird im Browser erzeugt, keine Tondatei)
+(function () {
+  var AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return;
+  var ctx = null, letzter = 0;
+
+  function bereit() {
+    if (!ctx) { try { ctx = new AC(); } catch (e) { return false; } }
+    if (ctx.state === 'suspended') { ctx.resume().catch(function () {}); }
+    return ctx.state === 'running';
+  }
+
+  // ein einzelner Schlag: kurzes Metall-Klicken (Rauschen) plus hölzerner Boden-Ton
+  function schlag(t, laut, hell) {
+    var dauer = 0.07;
+    var buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dauer), ctx.sampleRate);
+    var d = buf.getChannelData(0);
+    for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
+    var n = ctx.createBufferSource(); n.buffer = buf;
+    var f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = hell; f.Q.value = 1.4;
+    var g = ctx.createGain(); g.gain.setValueAtTime(laut, t); g.gain.exponentialRampToValueAtTime(0.001, t + dauer);
+    n.connect(f); f.connect(g); g.connect(ctx.destination); n.start(t);
+
+    var o = ctx.createOscillator(); o.type = 'triangle';
+    o.frequency.setValueAtTime(hell / 6, t); o.frequency.exponentialRampToValueAtTime(hell / 14, t + 0.05);
+    var og = ctx.createGain(); og.gain.setValueAtTime(laut * 0.5, t); og.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
+    o.connect(og); og.connect(ctx.destination); o.start(t); o.stop(t + 0.07);
+  }
+
+  function steppen(verzug) {
+    var jetzt = Date.now();
+    if (jetzt - letzter < 900) return;
+    if (!bereit()) {
+      // beim allerersten Klick ist der Ton noch am Aufwachen: kurz danach nochmals versuchen
+      if (ctx && !verzug) setTimeout(function () { if (ctx.state === 'running') steppen(0); }, 120);
+      return;
+    }
+    letzter = jetzt;
+    var t = ctx.currentTime + (verzug || 0);
+    schlag(t, 0.28, 3400);          // da
+    schlag(t + 0.11, 0.28, 3900);   // da
+    schlag(t + 0.25, 0.42, 2600);   // dack
+  }
+
+  // Browser erlauben Ton erst nach dem ersten Tippen oder Klicken auf der Seite
+  ['pointerdown', 'keydown'].forEach(function (ev) {
+    window.addEventListener(ev, function () { bereit(); }, { passive: true });
+  });
+
+  var ziele = document.querySelectorAll('.site-head .logo, footer .brand img');
+  ziele.forEach(function (el) {
+    el.addEventListener('mouseenter', function () { steppen(0.3); });
+    el.addEventListener('click', function () { steppen(0); });
+  });
+})();
