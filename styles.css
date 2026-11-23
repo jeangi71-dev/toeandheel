@@ -285,3 +285,4 @@ dialog.lightbox{overscroll-behavior:contain}
 .marquee:hover .track,.marquee:active .track{animation-play-state:paused}
 .cv-body h3{line-height:1.05}
 .split .arch img{object-position:50% 0}
+.split .arch img{transform-origin:50% 0}
