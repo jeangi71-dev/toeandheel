@@ -762,3 +762,32 @@ footer{border-top:0;background:#0E0A1F}
   background:linear-gradient(180deg,#161033 0,#2C1D5A 110px,#6A4D8E 220px,#B79CC9 320px,#E6D8EC 420px,#F5EDF4 100%)}
 .kontakt{padding-top:calc(clamp(48px,9vh,76px) + 320px);
   background:linear-gradient(180deg,#F5EDF4 0,#DCCAE4 100px,#A688BC 210px,#5E4285 320px,#281A52 430px,#0E0A1F 100%)}
+
+/* Feinschliff Licht: breitere, kraeftigere Kegel im Kopf; Sterne unregelmaessig verteilt */
+.stage-fx .beam,.beam{
+  --w:max(760px,96vh);
+  background:conic-gradient(from 157deg at 50% 0%,
+    transparent 0deg,
+    color-mix(in srgb,var(--c) 22%,transparent) 7deg,
+    color-mix(in srgb,var(--c) 62%,transparent) 16deg,
+    color-mix(in srgb,var(--c) 88%,#fff 12%) 23deg,
+    color-mix(in srgb,var(--c) 62%,transparent) 30deg,
+    color-mix(in srgb,var(--c) 22%,transparent) 39deg,
+    transparent 46deg,transparent 360deg);
+  -webkit-mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.8) 40%,rgba(0,0,0,.35) 75%,transparent 98%);
+  mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.8) 40%,rgba(0,0,0,.35) 75%,transparent 98%);
+  opacity:.62;
+}
+.beam:nth-of-type(3){opacity:.42}
+.showgruppe::after,.galerie::before,.kontakt::before{
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.95) 0 1.1px,transparent 1.8px),
+    radial-gradient(circle,rgba(255,214,160,.9) 0 1.5px,transparent 2.3px),
+    radial-gradient(circle,rgba(200,170,255,.9) 0 1px,transparent 1.7px),
+    radial-gradient(circle,rgba(255,255,255,.85) 0 1.3px,transparent 2px),
+    radial-gradient(circle,rgba(255,190,220,.85) 0 1.1px,transparent 1.8px),
+    radial-gradient(circle,rgba(255,255,255,.85) 0 2px,rgba(255,255,255,.2) 3.2px,transparent 5.5px),
+    radial-gradient(circle,rgba(255,255,255,.7) 0 .9px,transparent 1.5px);
+  background-size:173px 211px,239px 157px,311px 283px,127px 331px,419px 367px,563px 449px,97px 269px;
+  background-position:31px 47px,151px 13px,83px 199px,11px 233px,277px 101px,389px 307px,59px 139px;
+}
