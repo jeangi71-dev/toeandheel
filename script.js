@@ -140,12 +140,12 @@
   });
 })();
 
-// Logo-Bewegung: bei jedem Darüberfahren zufällig eine von sechs (nie zweimal dieselbe hintereinander)
+// Logo-Bewegung: bei jedem Darüberfahren zufällig eine von elf (nie zweimal dieselbe hintereinander)
 (function () {
   var logo = document.querySelector('.site-head .logo');
   var bild = logo && logo.querySelector('.logo-mark');
   if (!bild) return;
-  var arten = ['pendel', 'verbeugung', 'ferse', 'herz', 'pirouette', 'huepf'];
+  var arten = ['ruhig', 'huepf', 'pendel', 'pirouette', 'herz', 'seite', 'muenze', 'ferse', 'licht', 'pudding', 'verbeugung'];
   var letzte = -1;
   function waehlen() {
     var i;
