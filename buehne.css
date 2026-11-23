@@ -824,3 +824,13 @@ footer{border-top:0;background:#0E0A1F}
   background:radial-gradient(ellipse 62% 46% at 50% 62%,rgba(255,170,190,.16),rgba(255,170,190,.07) 45%,transparent 72%)}
 .showgruppe{background:linear-gradient(180deg,#3E2174 0,#4A2276 240px,#5F2473 70%,#6E2670 100%)}
 .kursleitung{background:linear-gradient(180deg,#6E2670 0,#8E3D7C 120px,#B87496 240px,#DDB3BC 350px,#F3DFDB 450px,#FBEEE4 100%);padding-top:calc(clamp(48px,9vh,76px) + 330px)}
+
+/* Scheinwerfer schwenken etwas deutlicher (vorher kaum sichtbar) */
+@keyframes schwenken{from{transform:rotate(-13deg)}to{transform:rotate(13deg)}}
+.hero .beam{animation-name:schwenken;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate}
+.hero .beam:nth-of-type(1){animation-duration:8s}
+.hero .beam:nth-of-type(2){animation-duration:11s}
+.hero .beam:nth-of-type(3){animation-duration:9.5s}
+.hero .beam:nth-of-type(4){animation-duration:12s}
+.hero .beam:nth-of-type(5){animation-duration:10s}
+@media (prefers-reduced-motion:reduce){.hero .beam{animation:none!important}}
