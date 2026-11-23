@@ -426,3 +426,82 @@ footer .brand img{width:132px;height:132px}
 }
 @keyframes logo-wackeln2{0%,100%{transform:scale(2.5) rotate(0)}25%{transform:scale(2.5) rotate(-6deg)}75%{transform:scale(2.5) rotate(6deg)}}
 @media (prefers-reduced-motion:reduce){ .site-head .logo:hover .logo-mark,footer .brand img:hover{animation:none!important} }
+
+/* ===== Überarbeitung 2: ruhigere, zueinander passende Farben und weiches, echtes Bühnenlicht ===== */
+:root{
+  --amber:#E8C583;      /* Champagner-Gold statt kräftigem Gelb */
+  --amber-deep:#A9843F;
+  --turq:#B79CFF;       /* Flieder statt Türkis */
+  --violet:#8B6CF0;
+}
+
+/* Bühnenlicht: keine gezeichneten Lampen mehr, sondern weiche Lichtbahnen im Dunst */
+.traverse{display:none}
+.stage-fx .beam,.beam{
+  top:-60px;height:calc(100% + 60px);
+  --w:clamp(170px,30vw,460px);
+  width:var(--w);margin-left:calc(var(--w) * -.5);
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--c) 70%,#fff 30%) 0%,
+    color-mix(in srgb,var(--c) 55%,transparent) 22%,
+    color-mix(in srgb,var(--c) 22%,transparent) 55%,
+    transparent 88%);
+  clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);
+  filter:blur(26px);
+  opacity:.42;
+  mix-blend-mode:screen;
+}
+.beam:nth-of-type(1){--x:10%;--c:#E0377F}
+.beam:nth-of-type(2){--x:30%;--c:#8B6CF0}
+.beam:nth-of-type(3){--x:52%;--c:#FFE7C2;opacity:.30}
+.beam:nth-of-type(4){--x:72%;--c:#FF7AB6}
+.beam:nth-of-type(5){--x:92%;--c:#7C83FF}
+/* heller Dunst oben, wo das Licht herkommt */
+.stage-fx::before{
+  content:"";position:absolute;left:-10%;right:-10%;top:-120px;height:260px;pointer-events:none;
+  background:
+    radial-gradient(ellipse 14% 60% at 10% 50%,rgba(224,55,127,.50),transparent 70%),
+    radial-gradient(ellipse 14% 60% at 30% 50%,rgba(139,108,240,.50),transparent 70%),
+    radial-gradient(ellipse 14% 60% at 52% 50%,rgba(255,231,194,.40),transparent 70%),
+    radial-gradient(ellipse 14% 60% at 72% 50%,rgba(255,122,182,.46),transparent 70%),
+    radial-gradient(ellipse 14% 60% at 92% 50%,rgba(124,131,255,.50),transparent 70%);
+  filter:blur(18px);mix-blend-mode:screen;
+}
+@media (max-width:699px){ .beam:nth-of-type(2),.beam:nth-of-type(4){display:none} .stage-fx .beam,.beam{filter:blur(18px)} }
+.hero-visual::after{filter:blur(10px);opacity:.8}
+
+/* Laufband: Magenta statt Gelb, ohne Punktreihen */
+.marquee{background:linear-gradient(90deg,#7F1A50,#B0225A 50%,#7F1A50);color:var(--cream)}
+.marquee::before,.marquee::after{display:none}
+.group span{padding:16px 18px}
+.group .star{color:var(--amber)}
+
+/* Zwischen-Abschnitte: eine Farbfamilie (Rosé, Flieder, Aubergine) */
+.angebot::before,.kursleitung::before,.medien::before{display:none}
+.angebot{
+  background:
+    radial-gradient(circle 460px at 94% 6%,rgba(224,55,127,.16),transparent 70%),
+    radial-gradient(circle 420px at 2% 98%,rgba(139,108,240,.20),transparent 70%),
+    linear-gradient(160deg,#F8ECF2 0%,#EFE3F6 100%);
+}
+.angebot .kicker{color:var(--magenta-deep)}
+.angebot .lead{color:var(--ink);font-weight:400}
+.angebot .course{box-shadow:0 18px 34px -22px rgba(60,20,80,.5)}
+.kursleitung{
+  background:
+    radial-gradient(circle 480px at 6% 8%,rgba(139,108,240,.34),transparent 70%),
+    radial-gradient(circle 440px at 98% 94%,rgba(224,55,127,.26),transparent 70%),
+    linear-gradient(150deg,#261659 0%,#4A1A66 55%,#6E1C57 100%);
+}
+.medien{
+  background:
+    radial-gradient(circle 440px at 4% 6%,rgba(139,108,240,.20),transparent 70%),
+    radial-gradient(circle 460px at 98% 96%,rgba(224,55,127,.15),transparent 70%),
+    linear-gradient(200deg,#F3E6F3 0%,#E9E2F8 100%);
+}
+.medien .kicker{color:var(--magenta-deep)}
+.badge{color:#2A1B2E}
+
+/* Grosse Bildschirme: Inhalt nutzt mehr Breite, Schrift etwas grösser */
+@media (min-width:1500px){ .wrap{max-width:min(1400px,76vw)} body{font-size:18px} }
+@media (prefers-reduced-motion:reduce){ .beam{animation:none!important} }
