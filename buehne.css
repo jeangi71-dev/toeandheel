@@ -532,3 +532,25 @@ footer .brand img{width:132px;height:132px}
 }
 /* Lichtquellen oben entfernt: die Strahlen kommen von ausserhalb des Bildes */
 .stage-fx::before{display:none}
+
+/* Kurse und Medien ebenfalls in Violett (statt hell), passend zu den übrigen Abschnitten */
+.angebot,.medien{color:var(--cream)}
+.angebot{
+  background:
+    radial-gradient(circle 520px at 96% 4%,rgba(224,55,127,.30),transparent 70%),
+    radial-gradient(circle 460px at 0% 100%,rgba(139,108,240,.34),transparent 70%),
+    linear-gradient(160deg,#35206F 0%,#4E257C 55%,#64277A 100%);
+}
+.medien{
+  background:
+    radial-gradient(circle 480px at 2% 4%,rgba(139,108,240,.36),transparent 70%),
+    radial-gradient(circle 500px at 100% 100%,rgba(224,55,127,.26),transparent 70%),
+    linear-gradient(200deg,#5A2476 0%,#44227A 50%,#2E1D6B 100%);
+}
+.angebot .kicker,.medien .kicker{color:var(--amber)}
+.angebot .sec-title,.medien .sec-title{color:var(--cream)}
+.angebot .lead{color:rgba(255,244,224,.95)}
+.angebot .course,.medien .press a{color:var(--ink);box-shadow:0 24px 44px -24px rgba(0,0,0,.65)}
+.medien .feature{box-shadow:0 0 0 1px rgba(232,197,131,.28),0 24px 44px -24px rgba(0,0,0,.65)}
+.angebot .info{box-shadow:inset 0 0 0 1px rgba(232,197,131,.28)}
+.angebot :focus-visible,.medien :focus-visible{outline-color:var(--amber)}
