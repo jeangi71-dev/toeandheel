@@ -300,3 +300,4 @@ dialog.lightbox{overscroll-behavior:contain}
   .course .pic{aspect-ratio:16/9}
 }
 @media (min-width:1500px){ .wrap{max-width:min(1400px,76vw)} body{font-size:18px} }
+@media (min-width:900px){ .split{align-items:start} }
