@@ -554,3 +554,77 @@ footer .brand img{width:132px;height:132px}
 .medien .feature{box-shadow:0 0 0 1px rgba(232,197,131,.28),0 24px 44px -24px rgba(0,0,0,.65)}
 .angebot .info{box-shadow:inset 0 0 0 1px rgba(232,197,131,.28)}
 .angebot :focus-visible,.medien :focus-visible{outline-color:var(--amber)}
+
+/* ===== Überarbeitung 3: EIN fliessender Farbverlauf von oben bis unten, ohne Kanten =====
+   Jeder Abschnitt beginnt genau mit der Endfarbe des vorherigen und gleitet in den ersten ~300px in seinen eigenen Ton.
+   Dunkel (helle Schrift): Kopf, Kurse, Showgruppe, Galerie, Kontakt. Hell (dunkle Schrift): Kursleitung, Medien. */
+body{background:#0E0A1F}
+.hero::after,.pool{display:none}
+.hero{background:
+  radial-gradient(ellipse 60% 50% at 78% 62%,rgba(224,55,127,.20),transparent 70%),
+  linear-gradient(180deg,#171131 0%,#1E1550 60%,#221757 100%)}
+.marquee{background:#221757;color:rgba(255,244,224,.92)}
+.marquee .track{border-block:1px solid rgba(232,197,131,.28)}
+.angebot{background:
+  radial-gradient(circle 520px at 94% 30%,rgba(224,55,127,.22),transparent 70%),
+  radial-gradient(circle 480px at 2% 82%,rgba(139,108,240,.28),transparent 70%),
+  linear-gradient(180deg,#221757 0,#2E1C69 220px,#47237A 100%)}
+.showgruppe{background:
+  radial-gradient(circle 520px at 8% 28%,rgba(139,108,240,.24),transparent 70%),
+  radial-gradient(circle 520px at 96% 78%,rgba(255,122,182,.22),transparent 70%),
+  linear-gradient(180deg,#47237A 0,#5C2379 200px,#8A2670 100%)}
+.kursleitung{color:var(--ink);padding-top:calc(clamp(48px,9vh,76px) + 210px);background:
+  radial-gradient(circle 520px at 96% 62%,rgba(224,55,127,.12),transparent 70%),
+  radial-gradient(circle 460px at 0% 92%,rgba(139,108,240,.14),transparent 70%),
+  linear-gradient(180deg,#8A2670 0,#C4567F 110px,#EBA9A6 200px,#F8E2DC 300px,#FBEEE2 100%)}
+.galerie{padding-top:calc(clamp(48px,9vh,76px) + 230px);background:
+  radial-gradient(ellipse 60% 30% at 50% 46%,rgba(224,55,127,.16),transparent 70%),
+  linear-gradient(180deg,#FBEEE2 0,#E3A9B5 90px,#8B3C7C 190px,#2C1A55 310px,#15102E 100%)}
+.medien{color:var(--ink);padding-top:calc(clamp(48px,9vh,76px) + 230px);background:
+  radial-gradient(circle 480px at 4% 60%,rgba(139,108,240,.16),transparent 70%),
+  radial-gradient(circle 480px at 98% 92%,rgba(224,55,127,.12),transparent 70%),
+  linear-gradient(180deg,#15102E 0,#4B2A72 110px,#B68CC4 200px,#EFE4F5 310px,#F6EEF4 100%)}
+.kontakt{padding-top:calc(clamp(48px,9vh,76px) + 230px);background:
+  radial-gradient(ellipse 50% 30% at 80% 60%,rgba(139,108,240,.22),transparent 70%),
+  linear-gradient(180deg,#F6EEF4 0,#BFA0CF 90px,#55307A 190px,#1D1440 310px,#0E0A1F 100%)}
+footer{border-top:0;background:#0E0A1F}
+/* Lichtbahnen in Galerie und Kontakt erst unterhalb des Übergangs */
+.galerie .stage-fx,.kontakt .stage-fx{top:240px}
+
+/* helle Abschnitte: wieder dunkle Schrift */
+.kursleitung .kicker,.medien .kicker{color:var(--magenta-deep)}
+.kursleitung .name,.medien .sec-title{color:var(--ink)}
+.kursleitung .lead{color:var(--ink)}
+.kursleitung .career li{border-bottom-color:var(--line)}
+.kursleitung .career .star{color:var(--magenta-deep)}
+.kursleitung .career small{color:var(--muted)}
+.kursleitung details.cv{background:var(--paper);border-color:var(--line)}
+.kursleitung .quote{background:var(--paper);border-left-color:var(--magenta)}
+.kursleitung .teacher .arch{box-shadow:0 30px 60px -30px rgba(80,20,70,.55)}
+.kursleitung :focus-visible,.medien :focus-visible{outline-color:var(--magenta-shadow)}
+.medien .press a{box-shadow:0 18px 34px -22px rgba(60,20,80,.5)}
+.medien .feature{box-shadow:0 24px 44px -24px rgba(40,10,60,.6)}
+/* Übergänge ohne Kante: Lichtbahnen und Farbschimmer laufen vor dem Abschnittsende aus */
+.stage-fx{-webkit-mask-image:linear-gradient(180deg,#000 0,#000 55%,transparent 96%);mask-image:linear-gradient(180deg,#000 0,#000 55%,transparent 96%)}
+.angebot{background:
+  radial-gradient(circle 380px at 88% 42%,rgba(224,55,127,.22),transparent 70%),
+  radial-gradient(circle 360px at 8% 58%,rgba(139,108,240,.28),transparent 70%),
+  linear-gradient(180deg,#221757 0,#2E1C69 220px,#47237A 100%)}
+.showgruppe{background:
+  radial-gradient(circle 360px at 10% 40%,rgba(139,108,240,.24),transparent 70%),
+  radial-gradient(circle 360px at 90% 52%,rgba(255,122,182,.20),transparent 70%),
+  linear-gradient(180deg,#47237A 0,#5C2379 200px,#8A2670 100%)}
+.kursleitung{background:
+  radial-gradient(circle 360px at 92% 58%,rgba(224,55,127,.12),transparent 70%),
+  radial-gradient(circle 340px at 6% 66%,rgba(139,108,240,.14),transparent 70%),
+  linear-gradient(180deg,#8A2670 0,#C4567F 110px,#EBA9A6 200px,#F8E2DC 300px,#FBEEE2 100%)}
+.medien{background:
+  radial-gradient(circle 340px at 8% 60%,rgba(139,108,240,.16),transparent 70%),
+  radial-gradient(circle 340px at 92% 70%,rgba(224,55,127,.12),transparent 70%),
+  linear-gradient(180deg,#15102E 0,#4B2A72 110px,#B68CC4 200px,#EFE4F5 310px,#F6EEF4 100%)}
+.kontakt{background:
+  radial-gradient(ellipse 40% 22% at 78% 58%,rgba(139,108,240,.22),transparent 70%),
+  linear-gradient(180deg,#F6EEF4 0,#BFA0CF 90px,#55307A 190px,#1D1440 310px,#0E0A1F 100%)}
+.hero{background:
+  radial-gradient(ellipse 46% 40% at 78% 50%,rgba(224,55,127,.20),transparent 70%),
+  linear-gradient(180deg,#171131 0%,#1E1550 60%,#221757 100%)}
