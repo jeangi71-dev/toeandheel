@@ -90,7 +90,7 @@
   }, { passive: true });
 })();
 
-// Steppgeräusch beim Logo: echte Aufnahme von Stepptänzern (ton/steppen.wav, freie Lizenz CC0)
+// Steppgeräusch beim Logo: echte Aufnahme von Stepptänzern (ton/steppen2.wav, freie Lizenz CC0)
 (function () {
   var AC = window.AudioContext || window.webkitAudioContext;
   if (!AC) return;
@@ -98,7 +98,7 @@
 
   function holen() {
     if (laden) return laden;
-    laden = fetch('ton/steppen.wav')
+    laden = fetch('ton/steppen2.wav')
       .then(function (r) { return r.arrayBuffer(); })
       .then(function (a) { return ctx.decodeAudioData(a); })
       .then(function (b) { aufnahme = b; })
