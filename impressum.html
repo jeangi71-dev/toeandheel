@@ -7,10 +7,10 @@
 <meta name="theme-color" content="#13233F">
 <link rel="icon" type="image/png" href="bilder/logo-64.png">
 <link rel="apple-touch-icon" href="bilder/logo-192.png">
-<link rel="stylesheet" href="styles.css?v=23">
+<link rel="stylesheet" href="styles.css?v=24">
 <script>
 /* Testphase: zeigt das Gerät eine ältere Fassung als der Server, lädt die Seite einmal frisch nach */
-(function(){var hier=23;try{fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+(function(){var hier=24;try{fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
 if(d.version>hier&&!/[?&]neu=/.test(location.search)){location.replace(location.pathname+'?neu='+d.version+location.hash)}}).catch(function(){})}catch(e){}})();
 </script>
 </head>
@@ -35,10 +35,19 @@ if(d.version>hier&&!/[?&]neu=/.test(location.search)){location.replace(location.
 <main class="page">
   <div class="wrap">
     <h1>Impressum</h1>
-    <p><strong>Toe &amp; Heel Hergiswil</strong><br>Telefon: <a class="textlink" href="tel:+41787408779">+41&nbsp;78&nbsp;740&nbsp;87&nbsp;79</a><br>E-Mail: <a class="textlink" href="mailto:toeandheel@gmx.ch">toeandheel@gmx.ch</a></p>
+    <p><strong>Verein Toe &amp; Heel Hergiswil</strong><br>Telefon: <a class="textlink" href="tel:+41787408779">+41&nbsp;78&nbsp;740&nbsp;87&nbsp;79</a><br>E-Mail: <a class="textlink" href="mailto:toeandheel@gmx.ch">toeandheel@gmx.ch</a></p>
+    <p>Kursleitung: Nicole Ruckstuhl</p>
+
     <h2>Haftungsausschluss</h2>
     <p>Toe &amp; Heel übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen.</p>
     <p>Haftungsansprüche gegen Toe &amp; Heel wegen Schäden materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten Informationen, durch Missbrauch der Verbindung oder durch technische Störungen entstanden sind, werden ausgeschlossen.</p>
+
+    <h2>Links</h2>
+    <p>Verweise und Links auf Websites Dritter liegen ausserhalb unseres Verantwortungsbereichs. Der Zugriff auf solche Websites und deren Nutzung erfolgen auf eigene Gefahr.</p>
+
+    <h2>Urheberrechte</h2>
+    <p>Die Texte, Bilder und Dateien auf dieser Website gehören dem Verein Toe &amp; Heel oder den genannten Rechteinhabern. Für die Verwendung braucht es vorgängig die schriftliche Zustimmung.</p>
+
     <h2>Bildnachweis</h2>
     <p>Stepptanz-Show 2025: Martin Ziegler PHOTO. Kinder- und Jugendtanzfestival Schweiz 2025: Roberto Conciatori. Übrige Bilder: Toe &amp; Heel Hergiswil.</p>
     <p>Steppgeräusch beim Logo: Aufnahme «tap dance practice» aus der Freesound-Gemeinschaft (freesound.org / Pixabay), frei nutzbar.</p>
@@ -47,7 +56,7 @@ if(d.version>hier&&!/[?&]neu=/.test(location.search)){location.replace(location.
 </main>
 <footer>
   <div class="wrap row">
-    <div><a class="logo" translate="no" href="index.html">Toe <span>&amp;</span> Heel</a><p style="margin:6px 0 0"><small>Stepptanz in Hergiswil</small><small class="stand">Fassung 23</small></p></div>
+    <div><a class="logo" translate="no" href="index.html">Toe <span>&amp;</span> Heel</a><p style="margin:6px 0 0"><small>Stepptanz in Hergiswil</small><small class="stand">Fassung 24</small></p></div>
     <ul>
       <li><a href="index.html#kontakt">Kontakt</a></li>
       <li><a href="impressum.html">Impressum</a></li>
@@ -55,6 +64,6 @@ if(d.version>hier&&!/[?&]neu=/.test(location.search)){location.replace(location.
     </ul>
   </div>
 </footer>
-<script src="script.js?v=23" defer></script>
+<script src="script.js?v=24" defer></script>
 </body>
 </html>
