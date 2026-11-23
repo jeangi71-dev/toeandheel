@@ -155,5 +155,23 @@
     bild.classList.add('bw-' + arten[i]);
   }
   waehlen();
-  logo.addEventListener('mouseenter', waehlen);
+
+  var zeiger = 'mouse', uhr = null;
+  function an() { waehlen(); logo.classList.add('aktiv'); }
+  function aus() { logo.classList.remove('aktiv'); }
+  window.addEventListener('pointerdown', function (e) { zeiger = e.pointerType || 'mouse'; }, { passive: true, capture: true });
+  // Maus: gross, solange sie darüber ist
+  logo.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') an(); });
+  logo.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') aus(); });
+  // Finger: antippen zeigt Bewegung und Ton, danach geht das Logo von selbst zurück
+  logo.addEventListener('click', function () {
+    if (zeiger === 'mouse') return;
+    clearTimeout(uhr);
+    logo.classList.remove('aktiv'); void logo.offsetWidth;
+    an();
+    uhr = setTimeout(aus, 2000);
+  });
+  // Tastatur: beim Ansteuern mit der Tab-Taste ebenfalls zeigen
+  logo.addEventListener('focus', function () { if (logo.matches(':focus-visible')) an(); });
+  logo.addEventListener('blur', aus);
 })();
