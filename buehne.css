@@ -951,3 +951,15 @@ footer .brand img.aktiv.fw-pudding{animation:fw-pudding .9s .22s ease-out 1}
 .site-head .logo{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 @media (prefers-reduced-motion:reduce){ footer .brand img.aktiv{animation:none!important} }
 footer .stand{display:block;margin-top:6px;font-size:12px;opacity:.5}
+
+/* ===== Kuerzere Uebergaenge: weniger leere Flaeche zwischen den Abschnitten (am Handy deutlich, am PC etwas) ===== */
+:root{--ueb:260px}
+@media (max-width:899px){ :root{--ueb:130px} section{padding-bottom:40px} .hero{padding-bottom:48px} }
+.kursleitung{padding-top:calc(var(--ueb) * .82 + 26px);
+  background:linear-gradient(180deg,#6E2670 0,#8E3D7C calc(var(--ueb) * .27),#B87496 calc(var(--ueb) * .53),#DDB3BC calc(var(--ueb) * .78),#F3DFDB var(--ueb),#FBEEE4 100%)}
+.galerie{padding-top:calc(var(--ueb) * .82 + 26px);
+  background:linear-gradient(180deg,#FBEEE4 0,#EBCBCF calc(var(--ueb) * .23),#B98AAE calc(var(--ueb) * .49),#6C4A8A calc(var(--ueb) * .74),#2B1C58 var(--ueb),#161033 100%)}
+.medien{padding-top:calc(var(--ueb) * .82 + 26px);
+  background:linear-gradient(180deg,#161033 0,#2C1D5A calc(var(--ueb) * .26),#6A4D8E calc(var(--ueb) * .52),#B79CC9 calc(var(--ueb) * .76),#E6D8EC var(--ueb),#F5EDF4 100%)}
+.kontakt{padding-top:calc(var(--ueb) * .82 + 26px);
+  background:linear-gradient(180deg,#F5EDF4 0,#DCCAE4 calc(var(--ueb) * .23),#A688BC calc(var(--ueb) * .49),#5E4285 calc(var(--ueb) * .74),#281A52 var(--ueb),#0E0A1F 100%)}
