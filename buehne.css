@@ -963,3 +963,17 @@ footer .stand{display:block;margin-top:6px;font-size:12px;opacity:.5}
   background:linear-gradient(180deg,#161033 0,#2C1D5A calc(var(--ueb) * .26),#6A4D8E calc(var(--ueb) * .52),#B79CC9 calc(var(--ueb) * .76),#E6D8EC var(--ueb),#F5EDF4 100%)}
 .kontakt{padding-top:calc(var(--ueb) * .82 + 26px);
   background:linear-gradient(180deg,#F5EDF4 0,#DCCAE4 calc(var(--ueb) * .23),#A688BC calc(var(--ueb) * .49),#5E4285 calc(var(--ueb) * .74),#281A52 var(--ueb),#0E0A1F 100%)}
+
+/* Textseiten (Impressum, Datenschutz) im Aussehen der Buehne: dunkel, helle Schrift, laeuft unten in die Fusszeile aus */
+.page{color:var(--cream);min-height:72vh;padding:clamp(56px,9vh,88px) 0 96px;
+  background:
+    radial-gradient(circle 420px at 88% 16%,rgba(224,55,127,.20),transparent 70%),
+    radial-gradient(circle 420px at 6% 62%,rgba(139,108,240,.24),transparent 70%),
+    linear-gradient(180deg,#171131 0%,#2A1A62 42%,#1D1546 82%,#0E0A1F 100%)}
+.page h1{color:var(--cream)}
+.page h2{color:var(--amber)}
+.page p{color:rgba(255,244,224,.94)}
+.page strong{color:var(--cream)}
+.page .textlink{color:var(--amber);text-underline-offset:4px}
+.page .textlink:hover{color:#fff}
+.page :focus-visible{outline-color:var(--amber)}
