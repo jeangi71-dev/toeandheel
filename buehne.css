@@ -1031,3 +1031,19 @@ footer .stand{display:block;margin-top:6px;font-size:12px;opacity:.5}
 }
 @keyframes fleck-synchron{from{transform:translateX(var(--fleck,40px))}to{transform:translateX(calc(var(--fleck,40px) * -1))}}
 @media (prefers-reduced-motion:reduce){ .hero-visual .arch::after,.hero-visual .arch::before{animation:none!important} }
+
+/* Kegel im Foto: Flaeche nach oben verlaengert, damit beim Schwenken oben keine schraege Kante sichtbar wird */
+.hero-visual .arch::after{
+  top:-240px;height:calc(160% + 240px);
+  background:conic-gradient(from 157deg at 50% calc(var(--oy,-140px) + 240px),
+    transparent 0deg,
+    color-mix(in srgb,var(--fc,#FF7AB6) 30%,transparent) 5deg,
+    color-mix(in srgb,var(--fc,#FF7AB6) 55%,rgba(255,240,230,.5)) 11deg,
+    color-mix(in srgb,var(--fc,#FF7AB6) 45%,rgba(255,246,236,.75)) 23deg,
+    color-mix(in srgb,var(--fc,#FF7AB6) 55%,rgba(255,240,230,.5)) 35deg,
+    color-mix(in srgb,var(--fc,#FF7AB6) 30%,transparent) 41deg,
+    transparent 46deg,transparent 360deg);
+  -webkit-mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.8) 44%,rgba(0,0,0,.3) 60%,transparent 70%);
+  mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.8) 44%,rgba(0,0,0,.3) 60%,transparent 70%);
+  transform-origin:50% calc(var(--oy,-140px) + 240px);
+}
