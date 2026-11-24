@@ -59,15 +59,13 @@
     count.textContent = (pos + 1) + ' / ' + list.length;
   }
 
-  document.querySelectorAll('[data-gallery]').forEach(function (g) {
-    var buttons = Array.prototype.slice.call(g.querySelectorAll('button'));
-    buttons.forEach(function (b, i) {
-      b.addEventListener('click', function () {
-        list = buttons;
-        show(i);
-        box.showModal();
-      });
-    });
+  // ein Klick auf irgendein Galerie-Foto (auch später nachgeladene) öffnet die Grossansicht
+  document.addEventListener('click', function (e) {
+    var knopf = e.target.closest ? e.target.closest('[data-gallery] button') : null;
+    if (!knopf) return;
+    list = Array.prototype.slice.call(knopf.closest('[data-gallery]').querySelectorAll('button'));
+    show(list.indexOf(knopf));
+    box.showModal();
   });
 
   box.querySelector('.lb-close').addEventListener('click', function () { box.close(); });
@@ -247,4 +245,83 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(ausrichten);
   setTimeout(ausrichten, 600);
   setTimeout(ausrichten, 2000);
+})();
+
+// Inhalte aus inhalte.json: Kurse, Galerie und Medienberichte lassen sich über die Bearbeitungs-Oberfläche ändern.
+// Was fest in der Seite steht, bleibt als Reserve stehen, falls die Datei einmal nicht geladen werden kann.
+(function () {
+  if (!document.getElementById('galerie') || !window.fetch) return;
+  function el(art, klasse, inhalt) { var e = document.createElement(art); if (klasse) e.className = klasse; if (inhalt) e.textContent = inhalt; return e; }
+  function pfad(w) { return String(w || '').replace(/^\/+/, ''); }           // immer relativ, damit es unter jeder Adresse stimmt
+  function zeit(t) { return String(t || '').replace(/ Uhr$/, '\u00a0Uhr'); }
+  var farben = ['var(--tomato)', 'var(--night)', 'var(--mustard)'];
+
+  function kurse(liste) {
+    var ort = document.querySelector('#angebot .cards');
+    if (!ort || !liste || !liste.length) return;
+    // Kartenfarben der jeweiligen Gestaltung übernehmen (stehen an den fest eingebauten Karten)
+    var eigene = Array.prototype.map.call(ort.querySelectorAll('.course'), function (c) { return c.style.getPropertyValue('--c'); }).filter(Boolean);
+    if (eigene.length) farben = eigene;
+    ort.textContent = '';
+    liste.forEach(function (k, i) {
+      var a = el('article', 'course'); a.style.setProperty('--c', farben[i % farben.length]);
+      if (k.bild) { var b = el('div', 'pic'), im = el('img'); im.src = pfad(k.bild); im.alt = k.bildtext || ''; im.loading = 'lazy'; b.appendChild(im); a.appendChild(b); }
+      var t = el('div', 'body');
+      if (k.gruppe) t.appendChild(el('p', 'who', k.gruppe));
+      t.appendChild(el('h3', '', k.titel));
+      if (k.stufe) t.appendChild(el('span', 'chip', k.stufe));
+      if (k.tag) t.appendChild(el('p', 'when', k.tag));
+      if (k.zeit) t.appendChild(el('p', 'time', zeit(k.zeit)));
+      if (k.hinweis) t.appendChild(el('p', 'note', k.hinweis));
+      a.appendChild(t); ort.appendChild(a);
+    });
+  }
+
+  function galerie(alben) {
+    var ort = document.querySelector('#galerie .wrap');
+    if (!ort || !alben || !alben.length) return;
+    var marke = ort.querySelector('.kicker'), titel = ort.querySelector('.sec-title');
+    var markeText = marke ? marke.textContent : 'Galerie', titelHtml = titel ? titel.innerHTML : 'Galerie';
+    ort.textContent = '';
+    alben.forEach(function (a, i) {
+      var kopf = el('div', 'gallery-intro');
+      if (i === 0) { kopf.appendChild(el('span', 'kicker', markeText)); var h = el('h2', 'sec-title'); h.id = 'galerie-title'; h.innerHTML = titelHtml; kopf.appendChild(h); }
+      if (a.titel) kopf.appendChild(el('h3', '', a.titel));
+      if (a.text) kopf.appendChild(el('p', '', a.text));
+      if (a.nachweis) kopf.appendChild(el('p', 'credit', a.nachweis));
+      ort.appendChild(kopf);
+      var liste = el('ul', 'gallery'); liste.setAttribute('data-gallery', '');
+      (a.fotos || []).forEach(function (f) {
+        if (!f || !f.bild) return;
+        var li = el('li'), knopf = el('button'), im = el('img');
+        knopf.type = 'button'; knopf.setAttribute('data-full', pfad(f.bild));
+        im.src = pfad(f.bild); im.alt = f.beschreibung || a.titel || 'Foto'; im.loading = 'lazy'; im.decoding = 'async';
+        knopf.appendChild(im); li.appendChild(knopf); liste.appendChild(li);
+      });
+      ort.appendChild(liste);
+    });
+  }
+
+  function medien(liste) {
+    var ort = document.querySelector('#medien .press');
+    if (!ort || !liste) return;
+    ort.textContent = '';
+    liste.forEach(function (m) {
+      var a = el('a'); a.href = /^https?:/.test(m.adresse || '') ? m.adresse : pfad(m.adresse); a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.appendChild(el('p', 'outlet', m.medium));
+      if (m.titel) a.appendChild(el('p', 'title', m.titel));
+      if (m.datum) a.appendChild(el('p', 'date', m.datum));
+      a.appendChild(el('p', 'go', 'Zum Bericht \u2192'));
+      ort.appendChild(a);
+    });
+  }
+
+  fetch('inhalte.json', { cache: 'no-cache' })
+    .then(function (r) { if (!r.ok) throw new Error('nicht geladen'); return r.json(); })
+    .then(function (d) {
+      try { kurse(d.kurse); } catch (e) {}
+      try { galerie(d.galerie); } catch (e) {}
+      try { medien(d.medien); } catch (e) {}
+    })
+    .catch(function () {});
 })();

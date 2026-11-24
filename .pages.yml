@@ -1,0 +1,81 @@
+# Einstellungen für die Bearbeitungs-Oberfläche (Pages CMS, app.pagescms.org).
+# Bearbeitbar sind nur die Inhalte in inhalte.json und die Fotos im Ordner bilder/. Das Aussehen der Seite bleibt unberührt.
+media:
+  - name: fotos
+    label: Fotos
+    input: bilder
+    output: bilder
+    rename: safe
+    extensions: [jpg, jpeg, png, webp]
+    categories: [image]
+
+content:
+  - name: inhalte
+    label: Inhalte der Website
+    type: file
+    path: inhalte.json
+    format: json
+    fields:
+      - name: kurse
+        label: Kurse
+        description: Die Kurskarten im Abschnitt «Angebot», in dieser Reihenfolge.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{titel} – {tag} {zeit}"
+        fields:
+          - { name: gruppe, label: "Für wen (z. B. Kinder, Erwachsene)", type: string }
+          - { name: titel, label: Name des Kurses, type: string, required: true }
+          - { name: stufe, label: "Stufe (z. B. Mittel/Fortgeschritten)", type: string }
+          - { name: tag, label: "Wochentag (z. B. Montags)", type: string }
+          - { name: zeit, label: "Zeit (z. B. 18.00–19.00 Uhr)", type: string }
+          - { name: hinweis, label: Hinweis unter der Zeit, type: text }
+          - name: bild
+            label: Foto der Karte
+            type: image
+            options: { media: fotos }
+          - { name: bildtext, label: "Bildbeschreibung (für Sehbehinderte)", type: string }
+      - name: galerie
+        label: Galerie
+        description: Jedes Album hat einen Titel, einen kurzen Text, den Bildnachweis und seine Fotos.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{titel}"
+        fields:
+          - { name: titel, label: Titel des Albums, type: string, required: true }
+          - { name: text, label: Text zum Album, type: text }
+          - { name: nachweis, label: "Bildnachweis (z. B. Fotos: Name)", type: string }
+          - name: fotos
+            label: Fotos
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{beschreibung}"
+            fields:
+              - name: bild
+                label: Foto
+                type: image
+                required: true
+                options: { media: fotos }
+              - { name: beschreibung, label: "Kurze Beschreibung (für Sehbehinderte)", type: string }
+      - name: medien
+        label: Medienberichte
+        description: Die Karten im Abschnitt «Medien». Die Sendung von Tele 1 steht fest in der Seite.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{medium} – {datum}"
+        fields:
+          - { name: medium, label: "Zeitung oder Sender", type: string, required: true }
+          - { name: titel, label: Titel, type: string }
+          - { name: datum, label: "Datum (z. B. 27. März 2025)", type: string }
+          - { name: adresse, label: "Adresse des Berichts (Link oder Datei im Ordner medien/)", type: string }
+
+settings:
+  content:
+    merge: true

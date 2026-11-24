@@ -1,0 +1,146 @@
+{
+  "kurse": [
+    {
+      "gruppe": "Kinder",
+      "titel": "Kinderstepptanz",
+      "stufe": "Ab 9 Jahren · Anfänger/Mittel",
+      "tag": "Mittwochs",
+      "zeit": "18.15–19.00 Uhr",
+      "hinweis": "Schnuppern nach Absprache jederzeit möglich.",
+      "bild": "bilder/b03.jpg",
+      "bildtext": "Kinder der Stepptanzgruppe auf der Bühne"
+    },
+    {
+      "gruppe": "Erwachsene",
+      "titel": "Amerikanischer Stepptanz",
+      "stufe": "Mittel/Fortgeschritten",
+      "tag": "Montags",
+      "zeit": "18.00–19.00 Uhr",
+      "hinweis": "Anfängerkurse für Erwachsene auf Anfrage.",
+      "bild": "bilder/b24.jpg",
+      "bildtext": "Stepptänzerinnen mit weissen Hüten und Krawatten"
+    },
+    {
+      "gruppe": "Erwachsene",
+      "titel": "Irischer Stepptanz",
+      "stufe": "Mittel/Fortgeschritten",
+      "tag": "Dienstags",
+      "zeit": "19.15–20.15 Uhr",
+      "hinweis": "Anfängerkurse für Erwachsene auf Anfrage.",
+      "bild": "bilder/b12.jpg",
+      "bildtext": "Tänzerin im irischen Tanzkleid"
+    }
+  ],
+  "galerie": [
+    {
+      "titel": "Stepptanz-Show 2025",
+      "text": "Am 4. April 2025 fand unsere Stepptanzshow im Loppersaal Hergiswil statt. Die Show war ein voller Erfolg! Das Publikum war begeistert von unserem abwechslungsreichen und unterhaltsamen Tanzprogramm und die Tänzerinnen präsentierten sich mit viel Leidenschaft und Energie.",
+      "nachweis": "Fotos: Martin Ziegler PHOTO",
+      "fotos": [
+        {
+          "bild": "bilder/b25.jpg",
+          "beschreibung": "Stepptanz-Show 2025: fünf Tänzerinnen in bunten Blusen"
+        },
+        {
+          "bild": "bilder/b14.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Tänzerinnen in roten Tupfenkleidern"
+        },
+        {
+          "bild": "bilder/b21.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Tanz mit bunten Regenschirmen"
+        },
+        {
+          "bild": "bilder/b15.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Duo im Matrosen-Look"
+        },
+        {
+          "bild": "bilder/b24.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Tänzerinnen mit weissen Hüten"
+        },
+        {
+          "bild": "bilder/b19.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Solotänzerin in Gold"
+        },
+        {
+          "bild": "bilder/b20.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Gruppe in roten Blusen"
+        },
+        {
+          "bild": "bilder/b16.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Kindergruppe in bunten Kostümen"
+        },
+        {
+          "bild": "bilder/b17.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Tänzerinnen im Charleston-Stil"
+        },
+        {
+          "bild": "bilder/b22.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Gruppe mit Hüten und Westen"
+        },
+        {
+          "bild": "bilder/b18.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Kinder in weissen Umhängen"
+        },
+        {
+          "bild": "bilder/b23.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Kindergruppe in Schwarz"
+        },
+        {
+          "bild": "bilder/b26.jpg",
+          "beschreibung": "Stepptanz-Show 2025: humorvolle Nummer mit Rollator"
+        },
+        {
+          "bild": "bilder/b27.jpg",
+          "beschreibung": "Stepptanz-Show 2025: Gruppe in schwarzen Kleidern"
+        },
+        {
+          "bild": "bilder/b07.jpg",
+          "beschreibung": "Alle Tänzerinnen gemeinsam auf der Bühne"
+        },
+        {
+          "bild": "bilder/b05.jpg",
+          "beschreibung": "Die Showgruppe in verschiedenen Kostümen"
+        }
+      ]
+    },
+    {
+      "titel": "5. Kinder- und Jugendtanzfestival Schweiz",
+      "text": "Zwei Mädchen aus unserer Kinder-Stepptanzgruppe haben am 7. Juni 2025 am Kinder- und Jugendtanzfestival im Stadttheater Sursee teilgenommen.",
+      "nachweis": "Fotos: Kinder- und Jugendtanzfestival Schweiz – Roberto Conciatori",
+      "fotos": [
+        {
+          "bild": "bilder/b28.jpg",
+          "beschreibung": "Zwei Mädchen tanzen am Kinder- und Jugendtanzfestival"
+        },
+        {
+          "bild": "bilder/b29.jpg",
+          "beschreibung": "Schlusspose am Kinder- und Jugendtanzfestival"
+        },
+        {
+          "bild": "bilder/b30.jpg",
+          "beschreibung": "Auftritt im Stadttheater Sursee"
+        }
+      ]
+    }
+  ],
+  "medien": [
+    {
+      "medium": "Nidwaldner Zeitung",
+      "titel": "Bericht",
+      "datum": "27. März 2025",
+      "adresse": "medien/nidwaldner-zeitung-2025-03-27.pdf"
+    },
+    {
+      "medium": "«Hergiswiler»",
+      "titel": "5 Fragen an Denise Odermatt",
+      "datum": "März 2025",
+      "adresse": "medien/hergiswiler-2025-03.pdf"
+    },
+    {
+      "medium": "Blitz",
+      "titel": "PR-Bericht",
+      "datum": "20. März 2025",
+      "adresse": "medien/blitz-2025-03-20.jpg"
+    }
+  ]
+}
