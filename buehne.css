@@ -977,3 +977,32 @@ footer .stand{display:block;margin-top:6px;font-size:12px;opacity:.5}
 .page .textlink{color:var(--amber);text-underline-offset:4px}
 .page .textlink:hover{color:#fff}
 .page :focus-visible{outline-color:var(--amber)}
+
+/* Lichtkegel im Foto der Taenzerin: weich wie die Scheinwerfer oben und schwenkt mit (vorher starr mit harter Kante) */
+.hero-visual::after{display:none}
+.hero-visual .arch{position:relative}
+.hero-visual .arch::after{
+  content:"";position:absolute;left:50%;top:-8%;width:170%;height:116%;margin-left:-85%;pointer-events:none;z-index:1;
+  background:conic-gradient(from 158deg at 50% 0%,
+    transparent 0deg,
+    rgba(255,214,232,.10) 5deg,
+    rgba(255,226,214,.34) 13deg,
+    rgba(255,240,226,.52) 22deg,
+    rgba(255,226,214,.34) 31deg,
+    rgba(255,214,232,.10) 39deg,
+    transparent 44deg,transparent 360deg);
+  -webkit-mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.85) 45%,rgba(0,0,0,.3) 82%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.85) 45%,rgba(0,0,0,.3) 82%,transparent 100%);
+  mix-blend-mode:screen;transform-origin:50% 0;
+  animation:schwenken-foto 12s ease-in-out infinite alternate;
+}
+/* heller Fleck auf dem Buehnenboden, wandert mit dem Kegel */
+.hero-visual .arch::before{
+  content:"";position:absolute;left:10%;right:10%;bottom:8%;height:22%;pointer-events:none;z-index:1;
+  background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(255,236,214,.34),rgba(255,236,214,.10) 55%,transparent 75%);
+  mix-blend-mode:screen;
+  animation:fleck-foto 12s ease-in-out infinite alternate;
+}
+@keyframes schwenken-foto{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+@keyframes fleck-foto{from{transform:translateX(11%)}to{transform:translateX(-11%)}}
+@media (prefers-reduced-motion:reduce){ .hero-visual .arch::after,.hero-visual .arch::before{animation:none!important} }

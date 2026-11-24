@@ -7,10 +7,10 @@
 <meta name="theme-color" content="#13233F">
 <link rel="icon" type="image/png" href="bilder/logo-64.png">
 <link rel="apple-touch-icon" href="bilder/logo-192.png">
-<link rel="stylesheet" href="styles.css?v=26">
+<link rel="stylesheet" href="styles.css?v=27">
 <script>
 /* Testphase: zeigt das Gerät eine ältere Fassung als der Server, lädt die Seite einmal frisch nach */
-(function(){var hier=26;try{fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+(function(){var hier=27;try{fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
 if(d.version>hier&&!/[?&]neu=/.test(location.search)){location.replace(location.pathname+'?neu='+d.version+location.hash)}}).catch(function(){})}catch(e){}})();
 </script>
 </head>
@@ -56,7 +56,7 @@ if(d.version>hier&&!/[?&]neu=/.test(location.search)){location.replace(location.
 </main>
 <footer>
   <div class="wrap row">
-    <div><a class="logo" translate="no" href="index.html">Toe <span>&amp;</span> Heel</a><p style="margin:6px 0 0"><small>Stepptanz in Hergiswil</small><small class="stand">Fassung 26</small></p></div>
+    <div><a class="logo" translate="no" href="index.html">Toe <span>&amp;</span> Heel</a><p style="margin:6px 0 0"><small>Stepptanz in Hergiswil</small><small class="stand">Fassung 27</small></p></div>
     <ul>
       <li><a href="index.html#kontakt">Kontakt</a></li>
       <li><a href="impressum.html">Impressum</a></li>
@@ -64,6 +64,6 @@ if(d.version>hier&&!/[?&]neu=/.test(location.search)){location.replace(location.
     </ul>
   </div>
 </footer>
-<script src="script.js?v=26" defer></script>
+<script src="script.js?v=27" defer></script>
 </body>
 </html>
