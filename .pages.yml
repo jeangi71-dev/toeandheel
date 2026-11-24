@@ -18,7 +18,6 @@ content:
     fields:
       - name: kurse
         label: Kurse
-        description: Die Kurskarten im Abschnitt «Angebot», in dieser Reihenfolge.
         type: object
         list:
           collapsible:
@@ -38,7 +37,6 @@ content:
           - { name: bildtext, label: "Bildbeschreibung (für Sehbehinderte)", type: string }
       - name: galerie
         label: Galerie
-        description: Jedes Album hat einen Titel, einen kurzen Text, den Bildnachweis und seine Fotos.
         type: object
         list:
           collapsible:
@@ -64,7 +62,6 @@ content:
               - { name: beschreibung, label: "Kurze Beschreibung (für Sehbehinderte)", type: string }
       - name: medien
         label: Medienberichte
-        description: Die Karten im Abschnitt «Medien». Die Sendung von Tele 1 steht fest in der Seite.
         type: object
         list:
           collapsible:
