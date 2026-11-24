@@ -90,47 +90,58 @@
   }, { passive: true });
 })();
 
-// Steppgeräusch beim Logo: echte Aufnahme von Stepptänzern (ton/steppen4.wav, freie Lizenz CC0)
+// Steppgeräusch beim Logo: echte Aufnahme von Stepptänzern (ton/steppen4.wav)
+// Browser spielen Ton erst, nachdem die Person einmal geklickt, getippt oder eine Taste gedrückt hat. Das lässt sich nicht umgehen;
+// deshalb wird hier alles so vorbereitet, dass der Ton ab diesem ersten Moment sofort und zuverlässig da ist.
 (function () {
   var AC = window.AudioContext || window.webkitAudioContext;
   if (!AC) return;
-  var ctx = null, aufnahme = null, laden = null, letzter = 0;
+  var ctx = null, roh = null, aufnahme = null, entschluesseln = null, letzter = 0, wartet = null;
 
-  function holen() {
-    if (laden) return laden;
-    laden = fetch('ton/steppen4.wav')
-      .then(function (r) { return r.arrayBuffer(); })
-      .then(function (a) { return ctx.decodeAudioData(a); })
-      .then(function (b) { aufnahme = b; })
-      .catch(function () { laden = null; });
-    return laden;
-  }
+  // Tondatei schon beim Öffnen der Seite holen (das ist ohne Klick erlaubt)
+  var holen = fetch('ton/steppen4.wav')
+    .then(function (r) { return r.arrayBuffer(); })
+    .then(function (d) { roh = d; })
+    .catch(function () {});
 
-  function bereit() {
-    if (!ctx) { try { ctx = new AC(); } catch (e) { return false; } }
+  function vorbereiten() {
+    if (!ctx) { try { ctx = new AC(); } catch (e) { return; } }
     if (ctx.state === 'suspended') { ctx.resume().catch(function () {}); }
-    holen();
-    return ctx.state === 'running' && !!aufnahme;
-  }
-
-  function steppen(verzug) {
-    var jetzt = Date.now();
-    if (jetzt - letzter < 900) return;
-    if (!bereit()) {
-      // beim allerersten Klick ist der Ton noch am Aufwachen: kurz danach nochmals versuchen
-      if (ctx && !verzug) setTimeout(function () { if (ctx.state === 'running' && aufnahme) steppen(0); }, 250);
-      return;
+    if (!aufnahme && !entschluesseln) {
+      entschluesseln = holen.then(function () {
+        if (!roh) throw new Error('keine Tondatei');
+        return ctx.decodeAudioData(roh.slice(0));
+      }).then(function (bild) { aufnahme = bild; })
+        .catch(function () { entschluesseln = null; });
     }
-    letzter = jetzt;
+  }
+  function bereit() { return !!ctx && ctx.state === 'running' && !!aufnahme; }
+
+  function abspielen(verzug) {
+    letzter = Date.now();
     var quelle = ctx.createBufferSource(); quelle.buffer = aufnahme;
     var laut = ctx.createGain(); laut.gain.value = 0.9;
     quelle.connect(laut); laut.connect(ctx.destination);
     quelle.start(ctx.currentTime + (verzug || 0));
   }
 
-  // Browser erlauben Ton erst nach dem ersten Tippen oder Klicken auf der Seite
-  ['pointerdown', 'keydown'].forEach(function (ev) {
-    window.addEventListener(ev, function () { bereit(); }, { passive: true });
+  function steppen(verzug) {
+    if (Date.now() - letzter < 900) return;
+    vorbereiten();
+    if (bereit()) { abspielen(verzug); return; }
+    // Ton wacht gerade auf oder wird noch geladen: bis zu 2 Sekunden lang nachfassen, dann einmal spielen
+    if (wartet) return;
+    var versuche = 0;
+    wartet = setInterval(function () {
+      versuche++;
+      if (bereit()) { clearInterval(wartet); wartet = null; if (Date.now() - letzter >= 900) abspielen(0); }
+      else if (versuche > 25) { clearInterval(wartet); wartet = null; }
+    }, 80);
+  }
+
+  // Erste Berührung der Seite, egal wo: Ton freischalten
+  ['pointerdown', 'pointerup', 'mousedown', 'click', 'keydown', 'touchstart', 'touchend'].forEach(function (ev) {
+    window.addEventListener(ev, vorbereiten, { passive: true, capture: true });
   });
 
   var ziele = document.querySelectorAll('.site-head .logo, footer .brand img');

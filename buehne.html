@@ -15,10 +15,10 @@
 <link rel="apple-touch-icon" href="bilder/logo-192.png">
 <link rel="preload" href="schrift/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="buehne.css?v=24">
+<link rel="stylesheet" href="buehne.css?v=25">
 <script>
 /* Testphase: zeigt das Gerät eine ältere Fassung als der Server, lädt die Seite einmal frisch nach */
-(function(){var hier=24;try{fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+(function(){var hier=25;try{fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
 if(d.version>hier&&!/[?&]neu=/.test(location.search)){location.replace(location.pathname+'?neu='+d.version+location.hash)}}).catch(function(){})}catch(e){}})();
 </script>
 </head>
@@ -382,7 +382,7 @@ if(d.version>hier&&!/[?&]neu=/.test(location.search)){location.replace(location.
       <img src="bilder/logo.png" alt="Logo Toe &amp; Heel Hergiswil" loading="lazy" width="132" height="132">
       <div>
         <a class="logo" translate="no" href="#top">Toe <span>&amp;</span> Heel</a>
-        <p style="margin:6px 0 0"><small>Stepptanz in Hergiswil</small><small class="stand">Fassung 24</small></p>
+        <p style="margin:6px 0 0"><small>Stepptanz in Hergiswil</small><small class="stand">Fassung 25</small></p>
       </div>
     </div>
     <ul>
@@ -406,6 +406,6 @@ if(d.version>hier&&!/[?&]neu=/.test(location.search)){location.replace(location.
   </div>
 </dialog>
 
-<script src="script.js?v=24" defer></script>
+<script src="script.js?v=25" defer></script>
 </body>
 </html>
