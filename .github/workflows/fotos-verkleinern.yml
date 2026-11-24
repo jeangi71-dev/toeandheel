@@ -1,0 +1,50 @@
+# Verkleinert neu hochgeladene Fotos automatisch und stellt die Website danach neu bereit.
+name: Fotos verkleinern
+
+on:
+  push:
+    branches: [main]
+    paths: ['bilder/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: fotos-verkleinern
+  cancel-in-progress: false
+
+jobs:
+  verkleinern:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Bildwerkzeug holen
+        run: npm install --no-save --no-package-lock sharp@0.33.5
+      - name: Zu grosse Fotos verkleinern
+        run: node .github/fotos-verkleinern.mjs
+      - name: Verkleinerte Fotos speichern
+        id: speichern
+        run: |
+          git config user.name "Fotos verkleinern"
+          git config user.email "actions@users.noreply.github.com"
+          git add bilder
+          if git diff --cached --quiet; then
+            echo "geaendert=nein" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Fotos automatisch verkleinert"
+            git pull --rebase
+            git push
+            echo "geaendert=ja" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Website neu bereitstellen
+        if: steps.speichern.outputs.geaendert == 'ja'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -sS -X POST -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds"
