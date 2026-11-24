@@ -198,3 +198,53 @@
   var fuss = document.querySelector('footer .brand img');
   einrichten(fuss, fuss, 'fw-', ['pendel', 'herz', 'pirouette', 'huepf', 'pudding']);
 })();
+
+// Bühnen-Version: ein Scheinwerfer über dem Foto der Tänzerin; sein Lichtkegel läuft im Foto weiter (ein Strahl, ein Takt)
+(function () {
+  var fx = document.querySelector('.hero .stage-fx');
+  var bogen = document.querySelector('.hero-visual .arch');
+  if (!fx || !bogen) return;
+  var kegel = fx.querySelectorAll('.beam'), lampen = fx.querySelectorAll('.traverse i');
+  if (kegel.length < 5 || lampen.length < 5) return;
+  var LINSE = 46, farben = ['', '', '#FFE7C2', '#FF7AB6'];
+
+  function ausrichten() {
+    var f = fx.getBoundingClientRect(), b = bogen.getBoundingClientRect();
+    if (!f.width || !b.width) return;
+    var n = innerWidth < 700 ? 2 : 3;                 // am Handy der mittlere, sonst der vierte Scheinwerfer
+    for (var i = 2; i <= 3; i++) {                    // den jeweils anderen an seinen normalen Platz zurück
+      if (i !== n) { lampen[i].style.left = ''; kegel[i].style.removeProperty('--x'); }
+    }
+    var x = ((b.left + b.width / 2 - f.left) / f.width * 100).toFixed(2) + '%';
+    lampen[n].style.left = x;
+    kegel[n].style.setProperty('--x', x);
+    var oy = (f.top + LINSE) - b.top;                 // Linse liegt so viele Pixel über der Oberkante des Fotos
+    var stil = getComputedStyle(kegel[n]);
+    bogen.style.setProperty('--oy', oy.toFixed(1) + 'px');
+    bogen.style.setProperty('--dauer', stil.animationDuration.split(',')[0]);
+    bogen.style.setProperty('--verzug', stil.animationDelay.split(',')[0]);
+    bogen.style.setProperty('--fc', farben[n]);
+    bogen.style.setProperty('--fleck', (Math.tan(13 * Math.PI / 180) * (b.height * 0.84 - oy)).toFixed(1) + 'px');
+    angleichen(kegel[n]);
+  }
+
+  // beide Bewegungen auf denselben Startzeitpunkt legen
+  function angleichen(strahl) {
+    if (!strahl.getAnimations || !document.getAnimations) return;
+    var vorbild = strahl.getAnimations()[0];
+    if (!vorbild || vorbild.startTime === null) return;
+    document.getAnimations().forEach(function (a) {
+      var e = a.effect;
+      if (e && e.target === bogen && (e.pseudoElement === '::after' || e.pseudoElement === '::before')) {
+        try { a.startTime = vorbild.startTime; } catch (err) {}
+      }
+    });
+  }
+
+  ausrichten();
+  window.addEventListener('load', ausrichten);
+  window.addEventListener('resize', ausrichten);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ausrichten);
+  setTimeout(ausrichten, 600);
+  setTimeout(ausrichten, 2000);
+})();

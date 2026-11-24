@@ -1006,3 +1006,28 @@ footer .stand{display:block;margin-top:6px;font-size:12px;opacity:.5}
 @keyframes schwenken-foto{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
 @keyframes fleck-foto{from{transform:translateX(11%)}to{transform:translateX(-11%)}}
 @media (prefers-reduced-motion:reduce){ .hero-visual .arch::after,.hero-visual .arch::before{animation:none!important} }
+
+/* Kegel im Foto = derselbe Strahl wie der Scheinwerfer darüber (Ursprung, Winkel und Takt setzt script.js über --oy, --dauer, --verzug, --fleck) */
+.hero-visual .arch::after{
+  left:-100%;width:300%;margin-left:0;top:0;height:160%;
+  background:conic-gradient(from 157deg at 50% var(--oy,-140px),
+    transparent 0deg,
+    color-mix(in srgb,var(--fc,#FF7AB6) 30%,transparent) 5deg,
+    color-mix(in srgb,var(--fc,#FF7AB6) 55%,rgba(255,240,230,.5)) 11deg,
+    color-mix(in srgb,var(--fc,#FF7AB6) 45%,rgba(255,246,236,.75)) 23deg,
+    color-mix(in srgb,var(--fc,#FF7AB6) 55%,rgba(255,240,230,.5)) 35deg,
+    color-mix(in srgb,var(--fc,#FF7AB6) 30%,transparent) 41deg,
+    transparent 46deg,transparent 360deg);
+  -webkit-mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.8) 34%,rgba(0,0,0,.3) 54%,transparent 64%);
+  mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.8) 34%,rgba(0,0,0,.3) 54%,transparent 64%);
+  opacity:.5;
+  transform-origin:50% var(--oy,-140px);
+  animation:schwenken var(--dauer,12s) ease-in-out var(--verzug,0s) infinite alternate;
+}
+.hero-visual .arch::before{
+  left:0;right:0;bottom:6%;height:20%;
+  background:radial-gradient(ellipse 42% 50% at 50% 50%,color-mix(in srgb,var(--fc,#FF7AB6) 30%,rgba(255,240,222,.5)),rgba(255,236,214,.10) 55%,transparent 75%);
+  animation:fleck-synchron var(--dauer,12s) ease-in-out var(--verzug,0s) infinite alternate;
+}
+@keyframes fleck-synchron{from{transform:translateX(var(--fleck,40px))}to{transform:translateX(calc(var(--fleck,40px) * -1))}}
+@media (prefers-reduced-motion:reduce){ .hero-visual .arch::after,.hero-visual .arch::before{animation:none!important} }
