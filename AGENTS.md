@@ -17,3 +17,6 @@
 - Kontakt-Titel heisst «Komm vorbei und schnuppere».
 - Umzug: Adresse toeandheel.ch ist bei Jimdo registriert, Abo läuft bis Ende Dezember 2026. Der Kunde holt den Transfercode; empfohlen wurde Infomaniak (Alternative Hostpoint). Danach Adresse bei GitHub Pages eintragen.
 - Werkzeuge im Projekt: .claude/skills/web-design-guidelines (Vercel) und playwright-cli (zum Durchklicken der echten Seite; lokale Dateien kann es nicht öffnen).
+- Impressum und Datenschutz gibt es je Version: impressum.html/datenschutz.html (Showtime, styles.css) und buehne-impressum.html/buehne-datenschutz.html (Bühne, buehne.css, noindex). Die Bühnen-Dateien sind Kopien mit umgestellten Verweisen – bei Textänderungen immer beide Paare anpassen. Kein Verweis darf von einer Version in die andere führen (Wunsch des Kunden, 24.11.2026).
+- Fassungsnummer: version.json, «var hier=…» und «Fassung …» in allen sechs HTML-Dateien sowie die ?v=-Nummern gemeinsam erhöhen; die Seiten laden sich dann auf dem Gerät von selbst frisch. Die Angabe «Fassung …» in der Fusszeile ist nur für die Testphase.
+- Logo-Ton: Browser spielen ihn erst nach dem ersten Klick, Tipp oder Tastendruck auf der Seite (nicht umgehbar); die Aufnahme wird vorab geladen.
